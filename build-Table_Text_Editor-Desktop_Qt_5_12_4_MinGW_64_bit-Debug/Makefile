@@ -224,6 +224,7 @@ Makefile: ../Table_Text_Editor/Table_Text_Editor.pro ../../../qt/5.12.4/mingw73_
 		../../../qt/5.12.4/mingw73_64/mkspecs/features/qt_config.prf \
 		../../../qt/5.12.4/mingw73_64/mkspecs/win32-g++/qmake.conf \
 		../../../qt/5.12.4/mingw73_64/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		../../../qt/5.12.4/mingw73_64/mkspecs/features/exclusive_builds.prf \
 		../../../qt/5.12.4/mingw73_64/mkspecs/features/toolchain.prf \
 		../../../qt/5.12.4/mingw73_64/mkspecs/features/default_pre.prf \
@@ -413,6 +414,7 @@ Makefile: ../Table_Text_Editor/Table_Text_Editor.pro ../../../qt/5.12.4/mingw73_
 ../../../qt/5.12.4/mingw73_64/mkspecs/features/qt_config.prf:
 ../../../qt/5.12.4/mingw73_64/mkspecs/win32-g++/qmake.conf:
 ../../../qt/5.12.4/mingw73_64/mkspecs/features/spec_post.prf:
+.qmake.stash:
 ../../../qt/5.12.4/mingw73_64/mkspecs/features/exclusive_builds.prf:
 ../../../qt/5.12.4/mingw73_64/mkspecs/features/toolchain.prf:
 ../../../qt/5.12.4/mingw73_64/mkspecs/features/default_pre.prf:
