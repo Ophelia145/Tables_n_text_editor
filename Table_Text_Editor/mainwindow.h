@@ -20,6 +20,13 @@ private slots:
     void openFile();
     void saveFile();
     void documentModified();
+    void findText();
+    void replaceText();
+    void clearText();
+    void undoAction();
+   //void copyText();
+    //void pasteText();
+
 
 private:
     Ui::MainWindow *ui;

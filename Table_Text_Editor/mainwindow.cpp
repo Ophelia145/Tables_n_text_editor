@@ -21,6 +21,13 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(ui->textEdit, &QTextEdit::textChanged, this, &MainWindow::documentModified);
     documentSaved = true;
+
+
+
+    connect(ui->findButton, &QToolButton::clicked, this, &MainWindow::findText);
+    connect(ui->replaceButton, &QToolButton::clicked, this, &MainWindow::replaceText);
+    connect(ui->clearButton, &QToolButton::clicked, this, &MainWindow::clearText);
+    connect(ui->undoButton, &QToolButton::clicked, this, &MainWindow::undoAction);
 }
 
 MainWindow::~MainWindow()
@@ -78,3 +85,39 @@ void MainWindow::saveFile() {
         }
     }
 }
+
+void MainWindow::findText() {
+    QString searchText = ui->searchLineEdit->text();
+    if (!ui->textEdit->find(searchText)) { // ищет текст от текущей позиции курсора
+        QMessageBox::information(this, "Результат поиска", "Текст не найден.");
+        ui->textEdit->moveCursor(QTextCursor::Start); // вернём курсор в начало для нового поиска
+    }
+}
+
+void MainWindow::replaceText() {
+    QString searchText = ui->searchLineEdit->text();
+    QString replaceText = ui->replaceLineEdit->text();
+
+    ui->textEdit->textCursor().beginEditBlock(); // начало транзакции для отмены нескольких изменений
+
+    // Поиск и замена текста
+    while (ui->textEdit->find(searchText)) {
+        QTextCursor cursor = ui->textEdit->textCursor();
+        cursor.insertText(replaceText);
+    }
+
+    ui->textEdit->textCursor().endEditBlock(); // завершение транзакции
+    ui->textEdit->moveCursor(QTextCursor::Start); // сброс позиции курсора
+}
+
+void MainWindow::clearText() {
+    ui->textEdit->clear();
+}
+
+void MainWindow::undoAction() {
+    ui->textEdit->undo();
+}
+
+
+
+
