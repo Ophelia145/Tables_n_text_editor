@@ -19,8 +19,8 @@ CXXFLAGS      = -fno-keep-inline-dllexport -O2 -std=gnu++11 -Wall -W -Wextra -fe
 INCPATH       = -I..\Table_Text_Editor -I. -I..\..\..\qt\5.12.4\mingw73_64\include -I..\..\..\qt\5.12.4\mingw73_64\include\QtWidgets -I..\..\..\qt\5.12.4\mingw73_64\include\QtGui -I..\..\..\qt\5.12.4\mingw73_64\include\QtANGLE -I..\..\..\qt\5.12.4\mingw73_64\include\QtCore -Irelease -I. -I\include -I..\..\..\qt\5.12.4\mingw73_64\mkspecs\win32-g++ 
 LINKER      =        g++
 LFLAGS        =        -Wl,-s -Wl,-subsystem,windows -mthreads
-LIBS        =        D:\vispro\qt\5.12.4\mingw73_64\lib\libQt5Widgets.a D:\vispro\qt\5.12.4\mingw73_64\lib\libQt5Gui.a D:\vispro\qt\5.12.4\mingw73_64\lib\libQt5Core.a  -lmingw32 D:\vispro\qt\5.12.4\mingw73_64\lib\libqtmain.a -LC:\openssl\lib -LC:\Utils\my_sql\mysql-5.6.11-winx64\lib -LC:\Utils\postgresql\pgsql\lib -lshell32 
-QMAKE         = D:\vispro\qt\5.12.4\mingw73_64\bin\qmake.exe
+LIBS        =        C:\qt\5.12.4\mingw73_64\lib\libQt5Widgets.a C:\qt\5.12.4\mingw73_64\lib\libQt5Gui.a C:\qt\5.12.4\mingw73_64\lib\libQt5Core.a  -lmingw32 C:\qt\5.12.4\mingw73_64\lib\libqtmain.a -LC:\openssl\lib -LC:\Utils\my_sql\mysql-5.6.11-winx64\lib -LC:\Utils\postgresql\pgsql\lib -lshell32 
+QMAKE         = C:\qt\5.12.4\mingw73_64\bin\qmake.exe
 IDC           = idc
 IDL           = midl
 ZIP           = zip -r -9
@@ -38,8 +38,8 @@ MKDIR         = mkdir
 INSTALL_FILE    = copy /y
 INSTALL_PROGRAM = copy /y
 INSTALL_DIR     = xcopy /s /q /y /i
-QINSTALL        = D:\vispro\qt\5.12.4\mingw73_64\bin\qmake.exe -install qinstall
-QINSTALL_PROGRAM = D:\vispro\qt\5.12.4\mingw73_64\bin\qmake.exe -install qinstall -exe
+QINSTALL        = C:\qt\5.12.4\mingw73_64\bin\qmake.exe -install qinstall
+QINSTALL_PROGRAM = C:\qt\5.12.4\mingw73_64\bin\qmake.exe -install qinstall -exe
 
 ####### Output directory
 
@@ -65,7 +65,7 @@ DESTDIR_TARGET = release\Table_Text_Editor.exe
 first: all
 all: Makefile.Release  release/Table_Text_Editor.exe
 
-release/Table_Text_Editor.exe: D:/vispro/qt/5.12.4/mingw73_64/lib/libQt5Widgets.a D:/vispro/qt/5.12.4/mingw73_64/lib/libQt5Gui.a D:/vispro/qt/5.12.4/mingw73_64/lib/libQt5Core.a D:/vispro/qt/5.12.4/mingw73_64/lib/libqtmain.a ui_mainwindow.h $(OBJECTS) 
+release/Table_Text_Editor.exe: C:/qt/5.12.4/mingw73_64/lib/libQt5Widgets.a C:/qt/5.12.4/mingw73_64/lib/libQt5Gui.a C:/qt/5.12.4/mingw73_64/lib/libQt5Core.a C:/qt/5.12.4/mingw73_64/lib/libqtmain.a ui_mainwindow.h $(OBJECTS) 
 	$(LINKER) $(LFLAGS) -o $(DESTDIR_TARGET) $(OBJECTS)  $(LIBS)
 
 qmake: FORCE
@@ -214,7 +214,7 @@ release/moc_mainwindow.cpp: ../Table_Text_Editor/mainwindow.h \
 		../../../qt/5.12.4/mingw73_64/include/QtGui/qicon.h \
 		release/moc_predefs.h \
 		../../../qt/5.12.4/mingw73_64/bin/moc.exe
-	D:\vispro\qt\5.12.4\mingw73_64\bin\moc.exe $(DEFINES) --include D:/vispro/lab5/Tables_n_text_editor/build-Table_Text_Editor-Desktop_Qt_5_12_4_MinGW_64_bit-Debug/release/moc_predefs.h -ID:/vispro/qt/5.12.4/mingw73_64/mkspecs/win32-g++ -ID:/vispro/lab5/Tables_n_text_editor/Table_Text_Editor -ID:/vispro/qt/5.12.4/mingw73_64/include -ID:/vispro/qt/5.12.4/mingw73_64/include/QtWidgets -ID:/vispro/qt/5.12.4/mingw73_64/include/QtGui -ID:/vispro/qt/5.12.4/mingw73_64/include/QtANGLE -ID:/vispro/qt/5.12.4/mingw73_64/include/QtCore -I. -ID:/vispro/qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -ID:/vispro/qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -ID:/vispro/qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -ID:/vispro/qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -ID:/vispro/qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -ID:/vispro/qt/Tools/mingw730_64/x86_64-w64-mingw32/include ..\Table_Text_Editor\mainwindow.h -o release\moc_mainwindow.cpp
+	C:\qt\5.12.4\mingw73_64\bin\moc.exe $(DEFINES) --include C:/lab5/Tables_n_text_editor/build-Table_Text_Editor-Desktop_Qt_5_12_4_MinGW_64_bit-Debug/release/moc_predefs.h -IC:/qt/5.12.4/mingw73_64/mkspecs/win32-g++ -IC:/lab5/Tables_n_text_editor/Table_Text_Editor -IC:/qt/5.12.4/mingw73_64/include -IC:/qt/5.12.4/mingw73_64/include/QtWidgets -IC:/qt/5.12.4/mingw73_64/include/QtGui -IC:/qt/5.12.4/mingw73_64/include/QtANGLE -IC:/qt/5.12.4/mingw73_64/include/QtCore -I. -ID:/vispro/qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ -ID:/vispro/qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 -ID:/vispro/qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward -ID:/vispro/qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include -ID:/vispro/qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed -ID:/vispro/qt/Tools/mingw730_64/x86_64-w64-mingw32/include ..\Table_Text_Editor\mainwindow.h -o release\moc_mainwindow.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -225,7 +225,7 @@ compiler_uic_clean:
 	-$(DEL_FILE) ui_mainwindow.h
 ui_mainwindow.h: ../Table_Text_Editor/mainwindow.ui \
 		../../../qt/5.12.4/mingw73_64/bin/uic.exe
-	D:\vispro\qt\5.12.4\mingw73_64\bin\uic.exe ..\Table_Text_Editor\mainwindow.ui -o ui_mainwindow.h
+	C:\qt\5.12.4\mingw73_64\bin\uic.exe ..\Table_Text_Editor\mainwindow.ui -o ui_mainwindow.h
 
 compiler_yacc_decl_make_all:
 compiler_yacc_decl_clean:
@@ -464,6 +464,10 @@ release/mainwindow.o: ../Table_Text_Editor/mainwindow.cpp ../Table_Text_Editor/m
 		../../../qt/5.12.4/mingw73_64/include/QtGui/qicon.h \
 		ui_mainwindow.h \
 		../../../qt/5.12.4/mingw73_64/include/QtCore/QVariant \
+		../../../qt/5.12.4/mingw73_64/include/QtGui/QIcon \
+		../../../qt/5.12.4/mingw73_64/include/QtWidgets/QAction \
+		../../../qt/5.12.4/mingw73_64/include/QtWidgets/qaction.h \
+		../../../qt/5.12.4/mingw73_64/include/QtWidgets/qactiongroup.h \
 		../../../qt/5.12.4/mingw73_64/include/QtWidgets/QApplication \
 		../../../qt/5.12.4/mingw73_64/include/QtWidgets/qapplication.h \
 		../../../qt/5.12.4/mingw73_64/include/QtCore/qcoreapplication.h \
@@ -471,14 +475,45 @@ release/mainwindow.o: ../Table_Text_Editor/mainwindow.cpp ../Table_Text_Editor/m
 		../../../qt/5.12.4/mingw73_64/include/QtWidgets/qdesktopwidget.h \
 		../../../qt/5.12.4/mingw73_64/include/QtGui/qguiapplication.h \
 		../../../qt/5.12.4/mingw73_64/include/QtGui/qinputmethod.h \
+		../../../qt/5.12.4/mingw73_64/include/QtWidgets/QGridLayout \
+		../../../qt/5.12.4/mingw73_64/include/QtWidgets/qgridlayout.h \
+		../../../qt/5.12.4/mingw73_64/include/QtWidgets/qlayout.h \
+		../../../qt/5.12.4/mingw73_64/include/QtWidgets/qlayoutitem.h \
+		../../../qt/5.12.4/mingw73_64/include/QtWidgets/qboxlayout.h \
+		../../../qt/5.12.4/mingw73_64/include/QtWidgets/QGroupBox \
+		../../../qt/5.12.4/mingw73_64/include/QtWidgets/qgroupbox.h \
+		../../../qt/5.12.4/mingw73_64/include/QtWidgets/qframe.h \
+		../../../qt/5.12.4/mingw73_64/include/QtWidgets/QLineEdit \
+		../../../qt/5.12.4/mingw73_64/include/QtWidgets/qlineedit.h \
+		../../../qt/5.12.4/mingw73_64/include/QtGui/qtextcursor.h \
+		../../../qt/5.12.4/mingw73_64/include/QtGui/qtextformat.h \
+		../../../qt/5.12.4/mingw73_64/include/QtGui/qpen.h \
+		../../../qt/5.12.4/mingw73_64/include/QtGui/qtextoption.h \
 		../../../qt/5.12.4/mingw73_64/include/QtWidgets/QMenuBar \
 		../../../qt/5.12.4/mingw73_64/include/QtWidgets/qmenubar.h \
 		../../../qt/5.12.4/mingw73_64/include/QtWidgets/qmenu.h \
-		../../../qt/5.12.4/mingw73_64/include/QtWidgets/qaction.h \
-		../../../qt/5.12.4/mingw73_64/include/QtWidgets/qactiongroup.h \
 		../../../qt/5.12.4/mingw73_64/include/QtWidgets/QStatusBar \
 		../../../qt/5.12.4/mingw73_64/include/QtWidgets/qstatusbar.h \
-		../../../qt/5.12.4/mingw73_64/include/QtWidgets/QWidget
+		../../../qt/5.12.4/mingw73_64/include/QtWidgets/QTextEdit \
+		../../../qt/5.12.4/mingw73_64/include/QtWidgets/qtextedit.h \
+		../../../qt/5.12.4/mingw73_64/include/QtWidgets/qabstractscrollarea.h \
+		../../../qt/5.12.4/mingw73_64/include/QtGui/qtextdocument.h \
+		../../../qt/5.12.4/mingw73_64/include/QtWidgets/QToolBar \
+		../../../qt/5.12.4/mingw73_64/include/QtWidgets/qtoolbar.h \
+		../../../qt/5.12.4/mingw73_64/include/QtWidgets/QToolButton \
+		../../../qt/5.12.4/mingw73_64/include/QtWidgets/qtoolbutton.h \
+		../../../qt/5.12.4/mingw73_64/include/QtWidgets/qabstractbutton.h \
+		../../../qt/5.12.4/mingw73_64/include/QtWidgets/QVBoxLayout \
+		../../../qt/5.12.4/mingw73_64/include/QtWidgets/QWidget \
+		../../../qt/5.12.4/mingw73_64/include/QtWidgets/QFileDialog \
+		../../../qt/5.12.4/mingw73_64/include/QtWidgets/qfiledialog.h \
+		../../../qt/5.12.4/mingw73_64/include/QtCore/qdir.h \
+		../../../qt/5.12.4/mingw73_64/include/QtCore/qfileinfo.h \
+		../../../qt/5.12.4/mingw73_64/include/QtWidgets/qdialog.h \
+		../../../qt/5.12.4/mingw73_64/include/QtCore/QFile \
+		../../../qt/5.12.4/mingw73_64/include/QtCore/QTextStream \
+		../../../qt/5.12.4/mingw73_64/include/QtWidgets/QMessageBox \
+		../../../qt/5.12.4/mingw73_64/include/QtWidgets/qmessagebox.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\mainwindow.o ..\Table_Text_Editor\mainwindow.cpp
 
 release/moc_mainwindow.o: release/moc_mainwindow.cpp 
