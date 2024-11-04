@@ -24,8 +24,9 @@ private slots:
     void replaceText();
     void clearText();
     void undoAction();
-   //void copyText();
-    //void pasteText();
+    void closeEvent(QCloseEvent *event);
+    void changeFontSize(int size);
+    void changeFontColor();
 
 
 private:

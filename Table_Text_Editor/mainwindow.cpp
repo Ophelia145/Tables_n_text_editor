@@ -28,6 +28,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->replaceButton, &QToolButton::clicked, this, &MainWindow::replaceText);
     connect(ui->clearButton, &QToolButton::clicked, this, &MainWindow::clearText);
     connect(ui->undoButton, &QToolButton::clicked, this, &MainWindow::undoAction);
+    loadSettings();
+        setupControlPanel();
+
 }
 
 MainWindow::~MainWindow()
@@ -118,6 +121,72 @@ void MainWindow::undoAction() {
     ui->textEdit->undo();
 }
 
+void MainWindow::closeEvent(QCloseEvent *event) {
+    if (!documentSaved) {
+        auto reply = QMessageBox::question(this, "Сохранить изменения???",
+                                           "Вы хотите сохранить изменения в этом файле?!?",
+                                           QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel);
+        if (reply == QMessageBox::Yes) {
+            saveFile();
+            event->accept();
+        } else if (reply == QMessageBox::Cancel) {
+            event->ignore();
+        } else {
+            event->accept();
+        }
+    } else {
+        event->accept();
+    }
+}
 
+
+
+void MainWindow::setupControlPanel() {
+    QToolBar *controlPanel = addToolBar("Панель управления");
+
+    // Размер шрифта
+    QSpinBox *fontSizeBox = new QSpinBox();
+    fontSizeBox->setRange(8, 48);
+    connect(fontSizeBox, QOverload<int>::of(&QSpinBox::valueChanged), this, &MainWindow::changeFontSize);
+    controlPanel->addWidget(fontSizeBox);
+
+    // Цвет текста
+    QAction *fontColorAction = new QAction("Цвет текста", this);
+    connect(fontColorAction, &QAction::triggered, this, &MainWindow::changeFontColor);
+    controlPanel->addAction(fontColorAction);
+
+    // Цвет фона
+    QAction *bgColorAction = new QAction("Цвет фона", this);
+    connect(bgColorAction, &QAction::triggered, this, &MainWindow::changeBackgroundColor);
+    controlPanel->addAction(bgColorAction);
+
+    // Отступы таблицы
+    QSpinBox *paddingBox = new QSpinBox();
+    paddingBox->setRange(0, 50);
+    connect(paddingBox, QOverload<int>::of(&QSpinBox::valueChanged), this, &MainWindow::setTablePadding);
+    controlPanel->addWidget(paddingBox);
+}
+
+void MainWindow::changeFontSize(int size) {
+    ui->textEdit->setFontPointSize(size);
+    saveSettings();
+}
+
+void MainWindow::changeFontColor() {
+    QColor color = QColorDialog::getColor(Qt::black, this, "Выберите цвет текста");
+    if (color.isValid()) {
+        ui->textEdit->setTextColor(color);
+        saveSettings();
+    }
+}
+void MainWindow::loadSettings() {    settings.beginGroup("MainWindow");
+    resize(settings.value("size", QSize(800, 600)).toSize());    move(settings.value("pos", QPoint(200, 200)).toPoint());
+    ui->textEdit->setFontPointSize(settings.value("fontSize", 12).toInt());    settings.endGroup();
+}
+void MainWindow::saveSettings() {    settings.beginGroup("MainWindow");
+    settings.setValue("size", size());    settings.setValue("pos", pos());
+    settings.setValue("fontSize", ui->textEdit->fontPointSize());    int padding = 10;  // Задайте значение отступа, который нужно сохранить
+    settings.setValue("tablePadding", padding);    settings.endGroup();
+}
 
 
