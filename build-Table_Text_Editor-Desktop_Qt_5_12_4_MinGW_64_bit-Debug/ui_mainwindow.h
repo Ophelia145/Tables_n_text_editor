@@ -15,10 +15,13 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QGroupBox>
+#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QStatusBar>
+#include <QtWidgets/QTabWidget>
+#include <QtWidgets/QTableWidget>
 #include <QtWidgets/QTextEdit>
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QToolButton>
@@ -37,7 +40,11 @@ public:
     QAction *ActionReplacement;
     QWidget *centralWidget;
     QGridLayout *gridLayout_2;
+    QTabWidget *tabWidget;
+    QWidget *Text;
     QTextEdit *textEdit;
+    QWidget *Tables;
+    QTableWidget *tableWidget;
     QGroupBox *ALLBOX;
     QVBoxLayout *verticalLayout;
     QGroupBox *groupBox_2;
@@ -85,9 +92,14 @@ public:
         gridLayout_2->setHorizontalSpacing(10);
         gridLayout_2->setVerticalSpacing(7);
         gridLayout_2->setContentsMargins(-1, 11, -1, -1);
-        textEdit = new QTextEdit(centralWidget);
+        tabWidget = new QTabWidget(centralWidget);
+        tabWidget->setObjectName(QString::fromUtf8("tabWidget"));
+        Text = new QWidget();
+        Text->setObjectName(QString::fromUtf8("Text"));
+        textEdit = new QTextEdit(Text);
         textEdit->setObjectName(QString::fromUtf8("textEdit"));
-        textEdit->setMinimumSize(QSize(600, 400));
+        textEdit->setGeometry(QRect(10, 10, 651, 471));
+        textEdit->setMinimumSize(QSize(390, 400));
         textEdit->setMaximumSize(QSize(16777215, 16777215));
         QFont font;
         font.setPointSize(12);
@@ -97,8 +109,15 @@ public:
         textEdit->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
         textEdit->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
         textEdit->setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContents);
+        tabWidget->addTab(Text, QString());
+        Tables = new QWidget();
+        Tables->setObjectName(QString::fromUtf8("Tables"));
+        tableWidget = new QTableWidget(Tables);
+        tableWidget->setObjectName(QString::fromUtf8("tableWidget"));
+        tableWidget->setGeometry(QRect(10, 20, 651, 441));
+        tabWidget->addTab(Tables, QString());
 
-        gridLayout_2->addWidget(textEdit, 0, 0, 1, 1);
+        gridLayout_2->addWidget(tabWidget, 0, 0, 2, 1);
 
         ALLBOX = new QGroupBox(centralWidget);
         ALLBOX->setObjectName(QString::fromUtf8("ALLBOX"));
@@ -185,7 +204,7 @@ public:
         verticalLayout->addWidget(groupBoxIN);
 
 
-        gridLayout_2->addWidget(ALLBOX, 0, 1, 1, 2);
+        gridLayout_2->addWidget(ALLBOX, 0, 1, 2, 2);
 
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
@@ -200,6 +219,9 @@ public:
         MainWindow->addToolBar(Qt::TopToolBarArea, toolBar);
 
         retranslateUi(MainWindow);
+
+        tabWidget->setCurrentIndex(1);
+
 
         QMetaObject::connectSlotsByName(MainWindow);
     } // setupUi
@@ -217,6 +239,8 @@ public:
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:12pt; font-weight:400; font-style:normal;\">\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:7.8pt;\"><br /></p></body></html>", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(Text), QApplication::translate("MainWindow", "Tab 1", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(Tables), QApplication::translate("MainWindow", "Tab 2", nullptr));
         ALLBOX->setTitle(QString());
         groupBox_2->setTitle(QString());
         toolButton_3->setText(QApplication::translate("MainWindow", "\320\241\320\276\320\267\320\264\320\260\321\202\321\214 \321\204\320\260\320\271\320\273", nullptr));
@@ -224,7 +248,7 @@ public:
         toolButton->setText(QApplication::translate("MainWindow", "\320\241\320\276\321\205\321\200\320\260\320\275\320\270\321\202\321\214", nullptr));
         groupBoxIN->setTitle(QString());
         findButton->setText(QApplication::translate("MainWindow", "\320\237\320\276\320\270\321\201\320\272", nullptr));
-        undoButton->setText(QApplication::translate("MainWindow", "\320\236\321\202\320\274\320\265\320\275\320\260 \320\277\320\276\321\201\320\273\320\265\320\264\320\275\320\265\320\263\320\276 \320\264\320\265\320\271\321\201\321\202\320\262\320\270\321\217", nullptr));
+        undoButton->setText(QApplication::translate("MainWindow", "\320\222\320\265\321\200\320\275\321\203\321\202\321\214", nullptr));
         clearButton->setText(QApplication::translate("MainWindow", "\320\236\321\207\320\270\321\201\321\202\320\270\321\202\321\214", nullptr));
         replaceButton->setText(QApplication::translate("MainWindow", "\320\227\320\260\320\274\320\265\320\275\320\260", nullptr));
         toolBar->setWindowTitle(QApplication::translate("MainWindow", "toolBar", nullptr));
