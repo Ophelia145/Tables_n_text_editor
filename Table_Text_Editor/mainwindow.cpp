@@ -76,7 +76,7 @@ void MainWindow::openFile() {
     QString fileName = QFileDialog::getOpenFileName(this, "Открыть файл");
     if (!fileName.isEmpty()) {
         QFile file(fileName);
-        if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        if (file.open(QIODevice::ReadWrite | QIODevice::Text)) {
             QTextStream in(&file);
             ui->textEdit->setPlainText(in.readAll());
             file.close();
@@ -181,25 +181,22 @@ void MainWindow::closeEvent(QCloseEvent *event) {
 void MainWindow::setupControlPanel() {
     QToolBar *controlPanel = addToolBar("Панель управления");
 
-    // Размер шрифта
     QSpinBox *fontSizeBox = new QSpinBox();
     fontSizeBox->setRange(8, 48);
     connect(fontSizeBox, QOverload<int>::of(&QSpinBox::valueChanged), this, &MainWindow::changeFontSize);
     controlPanel->addWidget(fontSizeBox);
 
-    // Цвет текста
     QAction *fontColorAction = new QAction("Цвет текста", this);
     connect(fontColorAction, &QAction::triggered, this, &MainWindow::changeFontColor);
     controlPanel->addAction(fontColorAction);
 
-    // Цвет фона
     QAction *bgColorAction = new QAction("Цвет фона", this);
     connect(bgColorAction, &QAction::triggered, this, &MainWindow::changeBackgroundColor);
     controlPanel->addAction(bgColorAction);
 
-    // Отступы таблицы
+
     QSpinBox *paddingBox = new QSpinBox();
-    paddingBox->setRange(0, 50);
+    paddingBox->setRange(0, 50); //менть отступы
     connect(paddingBox, QOverload<int>::of(&QSpinBox::valueChanged), this, &MainWindow::setTablePadding);
     controlPanel->addWidget(paddingBox);
 }
@@ -236,11 +233,11 @@ void MainWindow::setTablePadding(int padding) {
                 item = new QTableWidgetItem();
                 ui->tableWidget->setItem(row, col, item);
             }
-            item->setTextAlignment(Qt::AlignCenter);  // Центрирование текста
-            item->setData(Qt::UserRole, padding);  // Сохранение отступа в пользовательских данных
+            item->setTextAlignment(Qt::AlignCenter);  //центрирование текста
+            item->setData(Qt::UserRole, padding);  //сохранение отступа в пользодате
         }
     }
-    saveSettings();  // Сохранение настроек при изменении отступов
+    saveSettings(); //сэйвим настройки при измен отступов
 }
 
 
@@ -258,7 +255,7 @@ void MainWindow::saveSettings() {
     settings.setValue("size", size());
     settings.setValue("pos", pos());
     settings.setValue("fontSize", ui->textEdit->fontPointSize());
-    int padding = 10;  // Задайте значение отступа, который нужно сохранить
+    int padding = 10;
     settings.setValue("tablePadding", padding);
     settings.endGroup();
 }
@@ -266,13 +263,13 @@ void MainWindow::saveSettings() {
 
 
 void MainWindow::setupShortcuts() {
-    ui->ActionCreateNew->setShortcut(QKeySequence::New);
-    ui->ActionOpenFile->setShortcut(QKeySequence::Open);
-    ui->ActionSave->setShortcut(QKeySequence::Save);
-    ui->findButton->setShortcut(QKeySequence::Find);
+    ui->toolButton_3->setShortcut(QKeySequence("Ctrl+N"));
+    ui->toolButton_2->setShortcut(QKeySequence("Ctrl+O"));
+    ui->toolButton->setShortcut(QKeySequence("Ctrl+S"));
+    ui->findButton->setShortcut(QKeySequence("Ctrl+F"));
     ui->replaceButton->setShortcut(QKeySequence("Ctrl+R"));
     ui->clearButton->setShortcut(QKeySequence("Ctrl+L"));
-    ui->undoButton->setShortcut(QKeySequence::Undo);
+    ui->undoButton->setShortcut(QKeySequence("Ctrl+U"));
 }
 
 

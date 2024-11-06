@@ -130,7 +130,7 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 10: _t->changeFontColor(); break;
         case 11: _t->changeBackgroundColor(); break;
         case 12: _t->setTablePadding((*reinterpret_cast< int(*)>(_a[1]))); break;
-
+        //case 13: _t->on_toolButton_3_triggered(); break;
         default: ;
         }
     }

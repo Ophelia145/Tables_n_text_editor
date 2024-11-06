@@ -31,19 +31,17 @@ private slots:
     void changeBackgroundColor();
     void setTablePadding(int padding);
 
-
-    //void on_toolButton_3_triggered(QAction *arg1);
     void on_toolButton_3_triggered();
 
 private:
     Ui::MainWindow *ui;
-    bool documentSaved; //флаг для слежки за измен
+    bool documentSaved;
     void loadSettings();
     void saveSettings();
     void setupControlPanel();
-    QSettings settings;  // Для сохранения настроек
-    QString currentFilePath;         //к открытому файлу
-    QString tempFilePath = "temporary_file.txt";     //к временному файлу
+    QSettings settings;//для сохр настроек
+    QString currentFilePath;
+    QString tempFilePath = "temporary_file.txt";
     void setupShortcuts();
 
 };
