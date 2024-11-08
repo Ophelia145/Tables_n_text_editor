@@ -6,15 +6,24 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1092</width>
-    <height>688</height>
+    <width>1200</width>
+    <height>750</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>900</width>
-    <height>600</height>
+    <width>1200</width>
+    <height>700</height>
    </size>
+  </property>
+  <property name="font">
+   <font>
+    <pointsize>9</pointsize>
+    <weight>50</weight>
+    <italic>false</italic>
+    <bold>false</bold>
+    <underline>false</underline>
+   </font>
   </property>
   <property name="windowTitle">
    <string>Editor :)</string>
@@ -34,92 +43,22 @@
     <property name="verticalSpacing">
      <number>7</number>
     </property>
-    <item row="0" column="0" rowspan="2">
-     <widget class="QTabWidget" name="tabWidget">
-      <property name="currentIndex">
-       <number>0</number>
-      </property>
-      <widget class="QWidget" name="Text">
-       <attribute name="title">
-        <string>Tab 1</string>
-       </attribute>
-       <widget class="QTextEdit" name="textEdit">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>10</y>
-          <width>861</width>
-          <height>561</height>
-         </rect>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>390</width>
-          <height>400</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>16777215</width>
-          <height>16777215</height>
-         </size>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>12</pointsize>
-         </font>
-        </property>
-        <property name="cursor" stdset="0">
-         <cursorShape>IBeamCursor</cursorShape>
-        </property>
-        <property name="frameShadow">
-         <enum>QFrame::Sunken</enum>
-        </property>
-        <property name="verticalScrollBarPolicy">
-         <enum>Qt::ScrollBarAlwaysOn</enum>
-        </property>
-        <property name="horizontalScrollBarPolicy">
-         <enum>Qt::ScrollBarAsNeeded</enum>
-        </property>
-        <property name="sizeAdjustPolicy">
-         <enum>QAbstractScrollArea::AdjustToContents</enum>
-        </property>
-        <property name="html">
-         <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:7.8pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-        </property>
-       </widget>
-      </widget>
-      <widget class="QWidget" name="Tables">
-       <attribute name="title">
-        <string>Tab 2</string>
-       </attribute>
-       <widget class="QTableWidget" name="tableWidget">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>20</y>
-          <width>861</width>
-          <height>551</height>
-         </rect>
-        </property>
-       </widget>
-      </widget>
-     </widget>
-    </item>
-    <item row="0" column="1" rowspan="2" colspan="2">
+    <item row="0" column="0" rowspan="2" colspan="2">
      <widget class="QGroupBox" name="ALLBOX">
+      <property name="minimumSize">
+       <size>
+        <width>210</width>
+        <height>0</height>
+       </size>
+      </property>
       <property name="maximumSize">
        <size>
         <width>400</width>
-        <height>600</height>
+        <height>750</height>
        </size>
       </property>
       <property name="title">
-       <string/>
+       <string>Работа с файлами</string>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
@@ -164,7 +103,7 @@ p, li { white-space: pre-wrap; }
              </size>
             </property>
             <property name="text">
-             <string>Создать файл</string>
+             <string>Создать файл  (ctrl+N)</string>
             </property>
            </widget>
           </item>
@@ -183,7 +122,7 @@ p, li { white-space: pre-wrap; }
              </size>
             </property>
             <property name="text">
-             <string>Открыть файл</string>
+             <string>Открыть файл  (ctrl+O)</string>
             </property>
            </widget>
           </item>
@@ -202,7 +141,7 @@ p, li { white-space: pre-wrap; }
              </size>
             </property>
             <property name="text">
-             <string>Сохранить</string>
+             <string>Сохранить  (ctrl+S)</string>
             </property>
            </widget>
           </item>
@@ -214,14 +153,14 @@ p, li { white-space: pre-wrap; }
          <property name="maximumSize">
           <size>
            <width>200</width>
-           <height>270</height>
+           <height>400</height>
           </size>
          </property>
          <property name="cursor">
           <cursorShape>ArrowCursor</cursorShape>
          </property>
          <property name="title">
-          <string/>
+          <string>Работа в файле</string>
          </property>
          <property name="flat">
           <bool>true</bool>
@@ -230,21 +169,21 @@ p, li { white-space: pre-wrap; }
           <item row="1" column="0">
            <widget class="QToolButton" name="findButton">
             <property name="text">
-             <string>Поиск</string>
+             <string>Поиск  (ctrl+F)</string>
             </property>
            </widget>
           </item>
           <item row="5" column="0">
            <widget class="QToolButton" name="undoButton">
             <property name="text">
-             <string>Вернуть</string>
+             <string>Вернуть  (ctrl+U)</string>
             </property>
            </widget>
           </item>
           <item row="0" column="0">
            <widget class="QToolButton" name="clearButton">
             <property name="text">
-             <string>Очистить</string>
+             <string>Очистить (ctrl+L)</string>
             </property>
            </widget>
           </item>
@@ -254,7 +193,7 @@ p, li { white-space: pre-wrap; }
           <item row="3" column="0">
            <widget class="QToolButton" name="replaceButton">
             <property name="text">
-             <string>Замена</string>
+             <string>Замена  (ctrl+R)</string>
             </property>
            </widget>
           </item>
@@ -267,19 +206,222 @@ p, li { white-space: pre-wrap; }
       </layout>
      </widget>
     </item>
+    <item row="0" column="3">
+     <widget class="QToolBox" name="Funcs">
+      <property name="minimumSize">
+       <size>
+        <width>100</width>
+        <height>190</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>400</width>
+        <height>1200</height>
+       </size>
+      </property>
+      <property name="currentIndex">
+       <number>1</number>
+      </property>
+      <widget class="QWidget" name="Tables">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>254</width>
+         <height>597</height>
+        </rect>
+       </property>
+       <attribute name="label">
+        <string>Работа с таблицами</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_6">
+        <item row="0" column="0">
+         <widget class="QGroupBox" name="groupBox">
+          <property name="minimumSize">
+           <size>
+            <width>200</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="title">
+           <string/>
+          </property>
+          <property name="flat">
+           <bool>true</bool>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_2">
+           <item>
+            <widget class="QGroupBox" name="groupBox_Table">
+             <property name="title">
+              <string/>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_5">
+              <item row="0" column="0">
+               <widget class="QPushButton" name="pushButton">
+                <property name="minimumSize">
+                 <size>
+                  <width>40</width>
+                  <height>40</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Добавить таблицу</string>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QPushButton" name="pushButton_2">
+                <property name="minimumSize">
+                 <size>
+                  <width>40</width>
+                  <height>40</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Добавить столбец</string>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="0">
+               <widget class="QPushButton" name="pushButton_3">
+                <property name="minimumSize">
+                 <size>
+                  <width>40</width>
+                  <height>40</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Добавить строку</string>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="0">
+               <widget class="QPushButton" name="pushButton_4">
+                <property name="minimumSize">
+                 <size>
+                  <width>40</width>
+                  <height>40</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Удалить столбец</string>
+                </property>
+               </widget>
+              </item>
+              <item row="4" column="0">
+               <widget class="QPushButton" name="pushButton_6">
+                <property name="minimumSize">
+                 <size>
+                  <width>40</width>
+                  <height>40</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Удалить строку</string>
+                </property>
+               </widget>
+              </item>
+              <item row="5" column="0">
+               <widget class="QPushButton" name="pushButton_5">
+                <property name="minimumSize">
+                 <size>
+                  <width>40</width>
+                  <height>40</height>
+                 </size>
+                </property>
+                <property name="font">
+                 <font>
+                  <stylestrategy>PreferAntialias</stylestrategy>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Удалить таблицу</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="Text">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>301</width>
+         <height>576</height>
+        </rect>
+       </property>
+       <attribute name="label">
+        <string>Работа с текстом</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_7">
+        <item row="0" column="0">
+         <widget class="QGroupBox" name="groupBox_3">
+          <property name="maximumSize">
+           <size>
+            <width>400</width>
+            <height>800</height>
+           </size>
+          </property>
+          <property name="title">
+           <string/>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_4">
+           <item row="0" column="0">
+            <widget class="QPushButton" name="TextColor">
+             <property name="font">
+              <font>
+               <pointsize>9</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>Цвет текста</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QPushButton" name="ColorBackground">
+             <property name="font">
+              <font>
+               <pointsize>9</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>Цвет фона</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QSpinBox" name="TextSize"/>
+           </item>
+           <item row="3" column="0">
+            <widget class="QFontComboBox" name="fontComboBox"/>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+    <item row="0" column="2">
+     <widget class="QTextEdit" name="textEdit">
+      <property name="minimumSize">
+       <size>
+        <width>680</width>
+        <height>400</height>
+       </size>
+      </property>
+     </widget>
+    </item>
    </layout>
   </widget>
-  <widget class="QMenuBar" name="menuBar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>1092</width>
-     <height>26</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QStatusBar" name="statusBar"/>
   <widget class="QToolBar" name="toolBar">
    <property name="windowTitle">
     <string>toolBar</string>
@@ -291,6 +433,17 @@ p, li { white-space: pre-wrap; }
     <bool>false</bool>
    </attribute>
   </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1200</width>
+     <height>26</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
   <action name="ActionCreateNew">
    <property name="text">
     <string>Создать Новый файл</string>

@@ -5,12 +5,13 @@
 #include <QTextStream>
 #include <QMessageBox>
 #include <QCloseEvent>
-
 #include <QFontDialog>
 #include <QColorDialog>
 #include <QToolBar>
 #include <QComboBox>
+#include <QTextTableCell>
 #include <QSpinBox>
+#include<QInputDialog>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -29,20 +30,32 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->clearButton, &QToolButton::clicked, this, &MainWindow::clearText);
     connect(ui->undoButton, &QToolButton::clicked, this, &MainWindow::restoreText);
 
+
+
+
+    connect(ui->pushButton, &QPushButton::clicked, this, &MainWindow::addTable);
+    connect(ui->pushButton_2, &QPushButton::clicked, this, &MainWindow::addColumn);
+    connect(ui->pushButton_3, &QPushButton::clicked, this, &MainWindow::addRow);
+    connect(ui->pushButton_4, &QPushButton::clicked, this, &MainWindow::deleteColumn);
+    connect(ui->pushButton_5, &QPushButton::clicked, this, &MainWindow::deleteTable);
+    connect(ui->pushButton_6, &QPushButton::clicked, this, &MainWindow::deleteRow);
+
+    connect(ui->TextSize, QOverload<int>::of(&QSpinBox::valueChanged), this, &MainWindow::on_TextSize_valueChanged);
+
+    connect(ui->TextColor, &QPushButton::clicked, this, &MainWindow::on_TextColor_clicked);
+    connect(ui->fontComboBox, &QFontComboBox::currentFontChanged, this, &MainWindow::changeFont);
+
+
+
+
+    ui->TextSize->setRange(8, 72);
+    ui->TextSize->setValue(12);
+
+
+
+
     documentSaved = true;
-
-    ui->tableWidget->setRowCount(5);
-    ui->tableWidget->setColumnCount(5);
-
-    QStringList headers = { "1", "2", "3", "4", "5" };
-    ui->tableWidget->setHorizontalHeaderLabels(headers);
-
     loadSettings();
-
-    setTablePadding(10);
-
-    loadSettings();
-    setupControlPanel();
     setupShortcuts();
 }
 
@@ -56,61 +69,85 @@ void MainWindow::documentModified() {
     documentSaved = false;
 }
 
-void MainWindow::newFile() {
+
+void MainWindow::saveFileAsHtml(const QString &filePath)
+{
+    QFile file(filePath);
+    if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+        QTextStream out(&file);
+        QString htmlContent = ui->textEdit->toHtml();
+        out << htmlContent;
+        file.close();
+        documentSaved = true;
+        currentFilePath = filePath;
+    } else {
+        QMessageBox::warning(this, "Ошибка", "Не удалось сохранить файл.");
+    }
+}
+
+
+void MainWindow::openHtmlFile(const QString &filePath)
+{
+    QFile file(filePath);
+    if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        QTextStream in(&file);
+        QString htmlContent = in.readAll();
+        file.close();
+        ui->textEdit->setHtml(htmlContent);
+        currentFilePath = filePath;
+        documentSaved = true;
+    } else {
+        QMessageBox::warning(this, "Ошибка", "Не удалось открыть файл.");
+    }
+}
+
+
+
+
+
+void MainWindow::newFile()
+{
     if (!documentSaved) {
         auto reply = QMessageBox::question(this, "Сохранить изменения?",
-                                           "Вы правда не хотите сохранить изменения в этом файле?",
+                                           "Вы хотите сохранить изменения в этом файле?",
                                            QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel);
         if (reply == QMessageBox::Yes) {
             saveFile();
         } else if (reply == QMessageBox::Cancel) {
+
             return;
         }
     }
+
     ui->textEdit->clear();
     currentFilePath.clear();
     documentSaved = true;
 }
 
-void MainWindow::openFile() {
-    QString fileName = QFileDialog::getOpenFileName(this, "Открыть файл");
-    if (!fileName.isEmpty()) {
-        QFile file(fileName);
-        if (file.open(QIODevice::ReadWrite | QIODevice::Text)) {
-            QTextStream in(&file);
-            ui->textEdit->setPlainText(in.readAll());
-            file.close();
-            currentFilePath = fileName;
-            documentSaved = true;
-        } else {
-            QMessageBox::warning(this, "Ошибка", "Не удалось открыть файл");
+void MainWindow::saveFile()
+{
+    if (currentFilePath.isEmpty()) {
+        QString filePath = QFileDialog::getSaveFileName(this, "Сохранить как", "", "HTML Files (*.html)");
+        if (!filePath.isEmpty()) {
+            saveFileAsHtml(filePath);
         }
+    } else {
+        saveFileAsHtml(currentFilePath);
     }
 }
 
-void MainWindow::saveFile() {
-    if (currentFilePath.isEmpty()) {
-
-        currentFilePath = QFileDialog::getSaveFileName(this, "Сохранить файл");
-    }
-
-    if (!currentFilePath.isEmpty()) {
-        QFile file(currentFilePath);
-        if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
-            QTextStream out(&file);
-            out << ui->textEdit->toPlainText();
-            file.close();
-            documentSaved = true;
-        } else {
-            QMessageBox::warning(this, "Ошибка", "Не удалось сохранить файл");
-        }
+void MainWindow::openFile()
+{
+    QString filePath = QFileDialog::getOpenFileName(this, "Открыть файл", "", "HTML Files (*.html)");
+    if (!filePath.isEmpty()) {
+        openHtmlFile(filePath);
     }
 }
 
 void MainWindow::findText() {
     QString searchText = ui->searchLineEdit->text();
     if (!ui->textEdit->find(searchText)) {
-        QMessageBox::information(this, "Результат поиска", "Текст потерялся.");
+        QMessageBox::information(this, "Результат поиска", "Текст не найден.");
         ui->textEdit->moveCursor(QTextCursor::Start);
     }
 }
@@ -131,7 +168,6 @@ void MainWindow::replaceText() {
 }
 
 void MainWindow::clearText() {
-
     QFile tempFile(tempFilePath);
     if (tempFile.open(QIODevice::WriteOnly | QIODevice::Text)) {
         QTextStream out(&tempFile);
@@ -146,7 +182,6 @@ void MainWindow::clearText() {
 }
 
 void MainWindow::restoreText() {
-
     QFile tempFile(tempFilePath);
     if (tempFile.exists() && tempFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
         QTextStream in(&tempFile);
@@ -154,99 +189,41 @@ void MainWindow::restoreText() {
         tempFile.close();
         documentSaved = false;
     } else {
-        QMessageBox::warning(this, "Ошибка", "Временный файл потерялся");
+        QMessageBox::warning(this, "Ошибка", "Временный файл не найден");
     }
 }
-
 void MainWindow::closeEvent(QCloseEvent *event) {
-    if (!documentSaved) {
-        auto reply = QMessageBox::question(this, "Сохранить изменения???",
-                                           "Вы хотите сохранить изменения в этом файле?!?",
-                                           QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel);
-        if (reply == QMessageBox::Yes) {
-            saveFile();
-            event->accept();
-        } else if (reply == QMessageBox::Cancel) {
-            event->ignore();
-        } else {
-            event->accept();
-        }
+    if (!promptSaveIfModified()) {
+        event->ignore();
     } else {
+        saveSettings();
         event->accept();
     }
 }
 
-
-
-void MainWindow::setupControlPanel() {
-    QToolBar *controlPanel = addToolBar("Панель управления");
-
-    QSpinBox *fontSizeBox = new QSpinBox();
-    fontSizeBox->setRange(8, 48);
-    connect(fontSizeBox, QOverload<int>::of(&QSpinBox::valueChanged), this, &MainWindow::changeFontSize);
-    controlPanel->addWidget(fontSizeBox);
-
-    QAction *fontColorAction = new QAction("Цвет текста", this);
-    connect(fontColorAction, &QAction::triggered, this, &MainWindow::changeFontColor);
-    controlPanel->addAction(fontColorAction);
-
-    QAction *bgColorAction = new QAction("Цвет фона", this);
-    connect(bgColorAction, &QAction::triggered, this, &MainWindow::changeBackgroundColor);
-    controlPanel->addAction(bgColorAction);
-
-
-    QSpinBox *paddingBox = new QSpinBox();
-    paddingBox->setRange(0, 50); //менть отступы
-    connect(paddingBox, QOverload<int>::of(&QSpinBox::valueChanged), this, &MainWindow::setTablePadding);
-    controlPanel->addWidget(paddingBox);
-}
-
-void MainWindow::changeFontSize(int size) {
-    ui->textEdit->setFontPointSize(size);
-    saveSettings();
-}
-
-void MainWindow::changeFontColor() {
-    QColor color = QColorDialog::getColor(Qt::black, this, "Выберите цвет текста");
-    if (color.isValid()) {
-        ui->textEdit->setTextColor(color);
-        saveSettings();
-    }
-}
-
-void MainWindow::changeBackgroundColor() {
-    QColor color = QColorDialog::getColor(Qt::white, this, "Выберите цвет фона");
-    if (color.isValid()) {
-        QPalette palette = ui->textEdit->palette();
-        palette.setColor(QPalette::Base, color);
-        ui->textEdit->setPalette(palette);
-        saveSettings();
-    }
-}
-
-
-void MainWindow::setTablePadding(int padding) {
-    for (int row = 0; row < ui->tableWidget->rowCount(); ++row) {
-        for (int col = 0; col < ui->tableWidget->columnCount(); ++col) {
-            QTableWidgetItem *item = ui->tableWidget->item(row, col);
-            if (!item) {
-                item = new QTableWidgetItem();
-                ui->tableWidget->setItem(row, col, item);
-            }
-            item->setTextAlignment(Qt::AlignCenter);  //центрирование текста
-            item->setData(Qt::UserRole, padding);  //сохранение отступа в пользодате
+bool MainWindow::promptSaveIfModified() {
+    if (!documentSaved) {
+        auto reply = QMessageBox::question(this, "Сохранить изменения?",
+                                           "Вы хотите сохранить изменения в этом файле?",
+                                           QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel);
+        if (reply == QMessageBox::Yes) {
+            saveFile();
+            return true;
+        } else if (reply == QMessageBox::Cancel) {
+            return false;
         }
     }
-    saveSettings(); //сэйвим настройки при измен отступов
+    return true;
 }
+
+
 
 
 
 void MainWindow::loadSettings() {
     settings.beginGroup("MainWindow");
-    resize(settings.value("size", QSize(800, 600)).toSize());
+    resize(settings.value("size", QSize(400, 400)).toSize());
     move(settings.value("pos", QPoint(200, 200)).toPoint());
-    ui->textEdit->setFontPointSize(settings.value("fontSize", 12).toInt());
     settings.endGroup();
 }
 
@@ -254,10 +231,101 @@ void MainWindow::saveSettings() {
     settings.beginGroup("MainWindow");
     settings.setValue("size", size());
     settings.setValue("pos", pos());
-    settings.setValue("fontSize", ui->textEdit->fontPointSize());
-    int padding = 10;
-    settings.setValue("tablePadding", padding);
     settings.endGroup();
+}
+
+
+
+void MainWindow::addTable()
+{
+    bool ok;
+    int rows = QInputDialog::getInt(this, tr("Сколько строк"),
+                                     tr("Строки:"), 3, 1, 100, 1, &ok);
+    if (!ok) { return; }
+
+    int columns = QInputDialog::getInt(this, tr("Сколько столбцов"),
+                                        tr("Столбцы:"), 3, 1, 100, 1, &ok);
+    if (!ok) { return; }
+
+    QTextTableFormat tableFormat;
+    tableFormat.setBorder(1);
+    tableFormat.setCellPadding(10);
+    tableFormat.setCellSpacing(0);
+    tableFormat.setAlignment(Qt::AlignCenter);
+    tableFormat.setWidth(QTextLength(QTextLength::PercentageLength, 100));
+
+    QTextCursor cursor = ui->textEdit->textCursor();
+    QTextTable *table = cursor.insertTable(rows, columns, tableFormat);
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < columns; ++j) {
+            QTextTableCell cell = table->cellAt(i, j);
+            QTextCursor cellCursor = cell.firstCursorPosition();
+            cellCursor.insertText(" ");
+        }
+    }
+}
+
+void MainWindow::addRow()
+{
+    QTextCursor cursor = ui->textEdit->textCursor();
+    QTextTable *table = cursor.currentTable();
+    if (table) {
+        table->appendRows(1);
+    } else {
+        QMessageBox::information(this, tr("Упс"), tr("Нет таблицы для добавления строки."));
+    }
+}
+
+void MainWindow::addColumn()
+{
+    QTextCursor cursor = ui->textEdit->textCursor();
+    QTextTable *table = cursor.currentTable();
+    if (table) {
+        int rows = table->rows();
+        int columns = table->columns();
+        table->insertColumns(columns, 1);
+
+        for (int i = 0; i < rows; ++i) {
+            QTextTableCell cell = table->cellAt(i, columns);
+            QTextCursor cellCursor = cell.firstCursorPosition();
+            cellCursor.insertText(" ");
+        }
+    } else {
+        QMessageBox::information(this, tr("Ой-ой"), tr("Нет таблицы для добавления столбца."));
+    }
+}
+
+void MainWindow::deleteRow()
+{
+    QTextCursor cursor = ui->textEdit->textCursor();
+    QTextTable *table = cursor.currentTable();
+    if (table && table->rows() > 0) {
+        table->removeRows(table->rows() - 1, 1);
+    } else {
+        QMessageBox::information(this, tr("Как дальше жить!"), tr("Нет строк для удаления."));
+    }
+}
+
+void MainWindow::deleteColumn()
+{
+    QTextCursor cursor = ui->textEdit->textCursor();
+    QTextTable *table = cursor.currentTable();
+    if (table && table->columns() > 0) {
+        table->removeColumns(table->columns() - 1, 1);
+    } else {
+        QMessageBox::information(this, tr("Вот это да"), tr("Нет столбцов для удаления."));
+    }
+}
+
+void MainWindow::deleteTable()
+{
+    QTextCursor cursor = ui->textEdit->textCursor();
+    QTextTable *table = cursor.currentTable();
+    if (table) {
+        table->deleteLater();
+    } else {
+        QMessageBox::information(this, tr("Всё плохо"), tr("Нет таблицы для удаления."));
+    }
 }
 
 
@@ -274,29 +342,48 @@ void MainWindow::setupShortcuts() {
 
 
 
+void MainWindow::on_TextColor_clicked()
+{
+    QColor color = QColorDialog::getColor(Qt::black, this, "Выберите цвет текста");
+    if (color.isValid()) {
+        QTextCharFormat format;
+        format.setForeground(color);
+
+        QTextCursor cursor = ui->textEdit->textCursor();
+        if (cursor.hasSelection()) {
+            cursor.mergeCharFormat(format);
+        } else {
+            ui->textEdit->mergeCurrentCharFormat(format);
+        }
+    }
+}
 
 
+void MainWindow::on_TextSize_valueChanged(int fontSize)
+{
+    QTextCursor cursor = ui->textEdit->textCursor();
+    QTextCharFormat format;
+    format.setFontPointSize(fontSize);
 
+    if (cursor.hasSelection()) {
+        cursor.mergeCharFormat(format);
+    } else {
+        ui->textEdit->mergeCurrentCharFormat(format);
+    }
+}
 
+void MainWindow::changeFont(const QFont &font)
+{
+    QTextCharFormat format;
+    format.setFont(font);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    QTextCursor cursor = ui->textEdit->textCursor();
+    if (cursor.hasSelection()) {
+        cursor.mergeCharFormat(format);
+    } else {
+        ui->textEdit->mergeCurrentCharFormat(format);
+    }
+}
 
 
 

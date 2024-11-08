@@ -3,6 +3,9 @@
 
 #include <QMainWindow>
 #include <QSettings>
+#include <QFontDialog>
+#include <QColorDialog>
+#include <QMessageBox>
 
 namespace Ui {
 class MainWindow;
@@ -17,6 +20,9 @@ public:
     ~MainWindow();
 
 private slots:
+
+    void saveFileAsHtml(const QString &filePath);
+    void openHtmlFile(const QString &filePath);
     void newFile();
     void openFile();
     void saveFile();
@@ -25,13 +31,18 @@ private slots:
     void replaceText();
     void clearText();
     void restoreText();
-    void closeEvent(QCloseEvent *event);
-    void changeFontSize(int size);
-    void changeFontColor();
-    void changeBackgroundColor();
-    void setTablePadding(int padding);
+    void closeEvent(QCloseEvent *event) override;
+    void on_TextSize_valueChanged(int fontSize);
+    void on_TextColor_clicked();
+    void changeFont(const QFont &font);
 
-    void on_toolButton_3_triggered();
+
+    void addTable();
+    void addColumn();
+    void addRow();
+    void deleteColumn();
+    void deleteRow();
+    void deleteTable();
 
 private:
     Ui::MainWindow *ui;
@@ -39,15 +50,15 @@ private:
     void loadSettings();
     void saveSettings();
     void setupControlPanel();
-    QSettings settings;//для сохр настроек
+    void setupShortcuts();
+    bool promptSaveIfModified();
+
+    QSettings settings;
     QString currentFilePath;
     QString tempFilePath = "temporary_file.txt";
-    void setupShortcuts();
-
 };
 
 #endif // MAINWINDOW_H
-
 
 
 

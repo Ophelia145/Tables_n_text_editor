@@ -13,17 +13,18 @@
 #include <QtGui/QIcon>
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QFontComboBox>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QGroupBox>
-#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
+#include <QtWidgets/QPushButton>
+#include <QtWidgets/QSpinBox>
 #include <QtWidgets/QStatusBar>
-#include <QtWidgets/QTabWidget>
-#include <QtWidgets/QTableWidget>
 #include <QtWidgets/QTextEdit>
 #include <QtWidgets/QToolBar>
+#include <QtWidgets/QToolBox>
 #include <QtWidgets/QToolButton>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
@@ -40,11 +41,6 @@ public:
     QAction *ActionReplacement;
     QWidget *centralWidget;
     QGridLayout *gridLayout_2;
-    QTabWidget *tabWidget;
-    QWidget *Text;
-    QTextEdit *textEdit;
-    QWidget *Tables;
-    QTableWidget *tableWidget;
     QGroupBox *ALLBOX;
     QVBoxLayout *verticalLayout;
     QGroupBox *groupBox_2;
@@ -60,16 +56,45 @@ public:
     QLineEdit *searchLineEdit;
     QToolButton *replaceButton;
     QLineEdit *replaceLineEdit;
+    QToolBox *Funcs;
+    QWidget *Tables;
+    QGridLayout *gridLayout_6;
+    QGroupBox *groupBox;
+    QVBoxLayout *verticalLayout_2;
+    QGroupBox *groupBox_Table;
+    QGridLayout *gridLayout_5;
+    QPushButton *pushButton;
+    QPushButton *pushButton_2;
+    QPushButton *pushButton_3;
+    QPushButton *pushButton_4;
+    QPushButton *pushButton_6;
+    QPushButton *pushButton_5;
+    QWidget *Text;
+    QGridLayout *gridLayout_7;
+    QGroupBox *groupBox_3;
+    QGridLayout *gridLayout_4;
+    QPushButton *TextColor;
+    QPushButton *ColorBackground;
+    QSpinBox *TextSize;
+    QFontComboBox *fontComboBox;
+    QTextEdit *textEdit;
+    QToolBar *toolBar;
     QMenuBar *menuBar;
     QStatusBar *statusBar;
-    QToolBar *toolBar;
 
     void setupUi(QMainWindow *MainWindow)
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(900, 600);
-        MainWindow->setMinimumSize(QSize(900, 600));
+        MainWindow->resize(1200, 750);
+        MainWindow->setMinimumSize(QSize(1200, 700));
+        QFont font;
+        font.setPointSize(9);
+        font.setBold(false);
+        font.setItalic(false);
+        font.setUnderline(false);
+        font.setWeight(50);
+        MainWindow->setFont(font);
         QIcon icon;
         icon.addFile(QString::fromUtf8("../src/pencil.png"), QSize(), QIcon::Normal, QIcon::Off);
         MainWindow->setWindowIcon(icon);
@@ -92,36 +117,10 @@ public:
         gridLayout_2->setHorizontalSpacing(10);
         gridLayout_2->setVerticalSpacing(7);
         gridLayout_2->setContentsMargins(-1, 11, -1, -1);
-        tabWidget = new QTabWidget(centralWidget);
-        tabWidget->setObjectName(QString::fromUtf8("tabWidget"));
-        Text = new QWidget();
-        Text->setObjectName(QString::fromUtf8("Text"));
-        textEdit = new QTextEdit(Text);
-        textEdit->setObjectName(QString::fromUtf8("textEdit"));
-        textEdit->setGeometry(QRect(10, 10, 651, 471));
-        textEdit->setMinimumSize(QSize(390, 400));
-        textEdit->setMaximumSize(QSize(16777215, 16777215));
-        QFont font;
-        font.setPointSize(12);
-        textEdit->setFont(font);
-        textEdit->viewport()->setProperty("cursor", QVariant(QCursor(Qt::IBeamCursor)));
-        textEdit->setFrameShadow(QFrame::Sunken);
-        textEdit->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
-        textEdit->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
-        textEdit->setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContents);
-        tabWidget->addTab(Text, QString());
-        Tables = new QWidget();
-        Tables->setObjectName(QString::fromUtf8("Tables"));
-        tableWidget = new QTableWidget(Tables);
-        tableWidget->setObjectName(QString::fromUtf8("tableWidget"));
-        tableWidget->setGeometry(QRect(10, 20, 651, 441));
-        tabWidget->addTab(Tables, QString());
-
-        gridLayout_2->addWidget(tabWidget, 0, 0, 2, 1);
-
         ALLBOX = new QGroupBox(centralWidget);
         ALLBOX->setObjectName(QString::fromUtf8("ALLBOX"));
-        ALLBOX->setMaximumSize(QSize(400, 600));
+        ALLBOX->setMinimumSize(QSize(210, 0));
+        ALLBOX->setMaximumSize(QSize(400, 750));
         verticalLayout = new QVBoxLayout(ALLBOX);
         verticalLayout->setSpacing(6);
         verticalLayout->setContentsMargins(11, 11, 11, 11);
@@ -163,7 +162,7 @@ public:
 
         groupBoxIN = new QGroupBox(ALLBOX);
         groupBoxIN->setObjectName(QString::fromUtf8("groupBoxIN"));
-        groupBoxIN->setMaximumSize(QSize(200, 270));
+        groupBoxIN->setMaximumSize(QSize(200, 400));
         groupBoxIN->setCursor(QCursor(Qt::ArrowCursor));
         groupBoxIN->setFlat(true);
         gridLayout_3 = new QGridLayout(groupBoxIN);
@@ -204,23 +203,145 @@ public:
         verticalLayout->addWidget(groupBoxIN);
 
 
-        gridLayout_2->addWidget(ALLBOX, 0, 1, 2, 2);
+        gridLayout_2->addWidget(ALLBOX, 0, 0, 2, 2);
+
+        Funcs = new QToolBox(centralWidget);
+        Funcs->setObjectName(QString::fromUtf8("Funcs"));
+        Funcs->setMinimumSize(QSize(100, 190));
+        Funcs->setMaximumSize(QSize(400, 1200));
+        Tables = new QWidget();
+        Tables->setObjectName(QString::fromUtf8("Tables"));
+        Tables->setGeometry(QRect(0, 0, 254, 597));
+        gridLayout_6 = new QGridLayout(Tables);
+        gridLayout_6->setSpacing(6);
+        gridLayout_6->setContentsMargins(11, 11, 11, 11);
+        gridLayout_6->setObjectName(QString::fromUtf8("gridLayout_6"));
+        groupBox = new QGroupBox(Tables);
+        groupBox->setObjectName(QString::fromUtf8("groupBox"));
+        groupBox->setMinimumSize(QSize(200, 0));
+        groupBox->setFlat(true);
+        verticalLayout_2 = new QVBoxLayout(groupBox);
+        verticalLayout_2->setSpacing(6);
+        verticalLayout_2->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
+        groupBox_Table = new QGroupBox(groupBox);
+        groupBox_Table->setObjectName(QString::fromUtf8("groupBox_Table"));
+        gridLayout_5 = new QGridLayout(groupBox_Table);
+        gridLayout_5->setSpacing(6);
+        gridLayout_5->setContentsMargins(11, 11, 11, 11);
+        gridLayout_5->setObjectName(QString::fromUtf8("gridLayout_5"));
+        pushButton = new QPushButton(groupBox_Table);
+        pushButton->setObjectName(QString::fromUtf8("pushButton"));
+        pushButton->setMinimumSize(QSize(40, 40));
+
+        gridLayout_5->addWidget(pushButton, 0, 0, 1, 1);
+
+        pushButton_2 = new QPushButton(groupBox_Table);
+        pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
+        pushButton_2->setMinimumSize(QSize(40, 40));
+
+        gridLayout_5->addWidget(pushButton_2, 1, 0, 1, 1);
+
+        pushButton_3 = new QPushButton(groupBox_Table);
+        pushButton_3->setObjectName(QString::fromUtf8("pushButton_3"));
+        pushButton_3->setMinimumSize(QSize(40, 40));
+
+        gridLayout_5->addWidget(pushButton_3, 2, 0, 1, 1);
+
+        pushButton_4 = new QPushButton(groupBox_Table);
+        pushButton_4->setObjectName(QString::fromUtf8("pushButton_4"));
+        pushButton_4->setMinimumSize(QSize(40, 40));
+
+        gridLayout_5->addWidget(pushButton_4, 3, 0, 1, 1);
+
+        pushButton_6 = new QPushButton(groupBox_Table);
+        pushButton_6->setObjectName(QString::fromUtf8("pushButton_6"));
+        pushButton_6->setMinimumSize(QSize(40, 40));
+
+        gridLayout_5->addWidget(pushButton_6, 4, 0, 1, 1);
+
+        pushButton_5 = new QPushButton(groupBox_Table);
+        pushButton_5->setObjectName(QString::fromUtf8("pushButton_5"));
+        pushButton_5->setMinimumSize(QSize(40, 40));
+        QFont font1;
+        font1.setStyleStrategy(QFont::PreferAntialias);
+        pushButton_5->setFont(font1);
+
+        gridLayout_5->addWidget(pushButton_5, 5, 0, 1, 1);
+
+
+        verticalLayout_2->addWidget(groupBox_Table);
+
+
+        gridLayout_6->addWidget(groupBox, 0, 0, 1, 1);
+
+        Funcs->addItem(Tables, QString::fromUtf8("\320\240\320\260\320\261\320\276\321\202\320\260 \321\201 \321\202\320\260\320\261\320\273\320\270\321\206\320\260\320\274\320\270"));
+        Text = new QWidget();
+        Text->setObjectName(QString::fromUtf8("Text"));
+        Text->setGeometry(QRect(0, 0, 301, 576));
+        gridLayout_7 = new QGridLayout(Text);
+        gridLayout_7->setSpacing(6);
+        gridLayout_7->setContentsMargins(11, 11, 11, 11);
+        gridLayout_7->setObjectName(QString::fromUtf8("gridLayout_7"));
+        groupBox_3 = new QGroupBox(Text);
+        groupBox_3->setObjectName(QString::fromUtf8("groupBox_3"));
+        groupBox_3->setMaximumSize(QSize(400, 800));
+        gridLayout_4 = new QGridLayout(groupBox_3);
+        gridLayout_4->setSpacing(6);
+        gridLayout_4->setContentsMargins(11, 11, 11, 11);
+        gridLayout_4->setObjectName(QString::fromUtf8("gridLayout_4"));
+        TextColor = new QPushButton(groupBox_3);
+        TextColor->setObjectName(QString::fromUtf8("TextColor"));
+        QFont font2;
+        font2.setPointSize(9);
+        TextColor->setFont(font2);
+
+        gridLayout_4->addWidget(TextColor, 0, 0, 1, 1);
+
+        ColorBackground = new QPushButton(groupBox_3);
+        ColorBackground->setObjectName(QString::fromUtf8("ColorBackground"));
+        ColorBackground->setFont(font2);
+
+        gridLayout_4->addWidget(ColorBackground, 1, 0, 1, 1);
+
+        TextSize = new QSpinBox(groupBox_3);
+        TextSize->setObjectName(QString::fromUtf8("TextSize"));
+
+        gridLayout_4->addWidget(TextSize, 2, 0, 1, 1);
+
+        fontComboBox = new QFontComboBox(groupBox_3);
+        fontComboBox->setObjectName(QString::fromUtf8("fontComboBox"));
+
+        gridLayout_4->addWidget(fontComboBox, 3, 0, 1, 1);
+
+
+        gridLayout_7->addWidget(groupBox_3, 0, 0, 1, 1);
+
+        Funcs->addItem(Text, QString::fromUtf8("\320\240\320\260\320\261\320\276\321\202\320\260 \321\201 \321\202\320\265\320\272\321\201\321\202\320\276\320\274"));
+
+        gridLayout_2->addWidget(Funcs, 0, 3, 1, 1);
+
+        textEdit = new QTextEdit(centralWidget);
+        textEdit->setObjectName(QString::fromUtf8("textEdit"));
+        textEdit->setMinimumSize(QSize(680, 400));
+
+        gridLayout_2->addWidget(textEdit, 0, 2, 1, 1);
 
         MainWindow->setCentralWidget(centralWidget);
+        toolBar = new QToolBar(MainWindow);
+        toolBar->setObjectName(QString::fromUtf8("toolBar"));
+        MainWindow->addToolBar(Qt::TopToolBarArea, toolBar);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 900, 26));
+        menuBar->setGeometry(QRect(0, 0, 1200, 26));
         MainWindow->setMenuBar(menuBar);
         statusBar = new QStatusBar(MainWindow);
         statusBar->setObjectName(QString::fromUtf8("statusBar"));
         MainWindow->setStatusBar(statusBar);
-        toolBar = new QToolBar(MainWindow);
-        toolBar->setObjectName(QString::fromUtf8("toolBar"));
-        MainWindow->addToolBar(Qt::TopToolBarArea, toolBar);
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(1);
+        Funcs->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -234,23 +355,29 @@ public:
         ActionSave->setText(QApplication::translate("MainWindow", "\320\241\320\276\321\205\321\200\320\260\320\275\320\270\321\202\321\214 \321\204\320\260\320\271\320\273", nullptr));
         ActionSearch->setText(QApplication::translate("MainWindow", "\320\237\320\276\320\270\321\201\320\272", nullptr));
         ActionReplacement->setText(QApplication::translate("MainWindow", "\320\227\320\260\320\274\320\265\320\275\320\260", nullptr));
-        textEdit->setHtml(QApplication::translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:12pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:7.8pt;\"><br /></p></body></html>", nullptr));
-        tabWidget->setTabText(tabWidget->indexOf(Text), QApplication::translate("MainWindow", "Tab 1", nullptr));
-        tabWidget->setTabText(tabWidget->indexOf(Tables), QApplication::translate("MainWindow", "Tab 2", nullptr));
-        ALLBOX->setTitle(QString());
+        ALLBOX->setTitle(QApplication::translate("MainWindow", "\320\240\320\260\320\261\320\276\321\202\320\260 \321\201 \321\204\320\260\320\271\320\273\320\260\320\274\320\270", nullptr));
         groupBox_2->setTitle(QString());
-        toolButton_3->setText(QApplication::translate("MainWindow", "\320\241\320\276\320\267\320\264\320\260\321\202\321\214 \321\204\320\260\320\271\320\273", nullptr));
-        toolButton_2->setText(QApplication::translate("MainWindow", "\320\236\321\202\320\272\321\200\321\213\321\202\321\214 \321\204\320\260\320\271\320\273", nullptr));
-        toolButton->setText(QApplication::translate("MainWindow", "\320\241\320\276\321\205\321\200\320\260\320\275\320\270\321\202\321\214", nullptr));
-        groupBoxIN->setTitle(QString());
-        findButton->setText(QApplication::translate("MainWindow", "\320\237\320\276\320\270\321\201\320\272", nullptr));
-        undoButton->setText(QApplication::translate("MainWindow", "\320\222\320\265\321\200\320\275\321\203\321\202\321\214", nullptr));
-        clearButton->setText(QApplication::translate("MainWindow", "\320\236\321\207\320\270\321\201\321\202\320\270\321\202\321\214", nullptr));
-        replaceButton->setText(QApplication::translate("MainWindow", "\320\227\320\260\320\274\320\265\320\275\320\260", nullptr));
+        toolButton_3->setText(QApplication::translate("MainWindow", "\320\241\320\276\320\267\320\264\320\260\321\202\321\214 \321\204\320\260\320\271\320\273  (ctrl+N)", nullptr));
+        toolButton_2->setText(QApplication::translate("MainWindow", "\320\236\321\202\320\272\321\200\321\213\321\202\321\214 \321\204\320\260\320\271\320\273  (ctrl+O)", nullptr));
+        toolButton->setText(QApplication::translate("MainWindow", "\320\241\320\276\321\205\321\200\320\260\320\275\320\270\321\202\321\214  (ctrl+S)", nullptr));
+        groupBoxIN->setTitle(QApplication::translate("MainWindow", "\320\240\320\260\320\261\320\276\321\202\320\260 \320\262 \321\204\320\260\320\271\320\273\320\265", nullptr));
+        findButton->setText(QApplication::translate("MainWindow", "\320\237\320\276\320\270\321\201\320\272  (ctrl+F)", nullptr));
+        undoButton->setText(QApplication::translate("MainWindow", "\320\222\320\265\321\200\320\275\321\203\321\202\321\214  (ctrl+U)", nullptr));
+        clearButton->setText(QApplication::translate("MainWindow", "\320\236\321\207\320\270\321\201\321\202\320\270\321\202\321\214 (ctrl+L)", nullptr));
+        replaceButton->setText(QApplication::translate("MainWindow", "\320\227\320\260\320\274\320\265\320\275\320\260  (ctrl+R)", nullptr));
+        groupBox->setTitle(QString());
+        groupBox_Table->setTitle(QString());
+        pushButton->setText(QApplication::translate("MainWindow", "\320\224\320\276\320\261\320\260\320\262\320\270\321\202\321\214 \321\202\320\260\320\261\320\273\320\270\321\206\321\203", nullptr));
+        pushButton_2->setText(QApplication::translate("MainWindow", "\320\224\320\276\320\261\320\260\320\262\320\270\321\202\321\214 \321\201\321\202\320\276\320\273\320\261\320\265\321\206", nullptr));
+        pushButton_3->setText(QApplication::translate("MainWindow", "\320\224\320\276\320\261\320\260\320\262\320\270\321\202\321\214 \321\201\321\202\321\200\320\276\320\272\321\203", nullptr));
+        pushButton_4->setText(QApplication::translate("MainWindow", "\320\243\320\264\320\260\320\273\320\270\321\202\321\214 \321\201\321\202\320\276\320\273\320\261\320\265\321\206", nullptr));
+        pushButton_6->setText(QApplication::translate("MainWindow", "\320\243\320\264\320\260\320\273\320\270\321\202\321\214 \321\201\321\202\321\200\320\276\320\272\321\203", nullptr));
+        pushButton_5->setText(QApplication::translate("MainWindow", "\320\243\320\264\320\260\320\273\320\270\321\202\321\214 \321\202\320\260\320\261\320\273\320\270\321\206\321\203", nullptr));
+        Funcs->setItemText(Funcs->indexOf(Tables), QApplication::translate("MainWindow", "\320\240\320\260\320\261\320\276\321\202\320\260 \321\201 \321\202\320\260\320\261\320\273\320\270\321\206\320\260\320\274\320\270", nullptr));
+        groupBox_3->setTitle(QString());
+        TextColor->setText(QApplication::translate("MainWindow", "\320\246\320\262\320\265\321\202 \321\202\320\265\320\272\321\201\321\202\320\260", nullptr));
+        ColorBackground->setText(QApplication::translate("MainWindow", "\320\246\320\262\320\265\321\202 \321\204\320\276\320\275\320\260", nullptr));
+        Funcs->setItemText(Funcs->indexOf(Text), QApplication::translate("MainWindow", "\320\240\320\260\320\261\320\276\321\202\320\260 \321\201 \321\202\320\265\320\272\321\201\321\202\320\276\320\274", nullptr));
         toolBar->setWindowTitle(QApplication::translate("MainWindow", "toolBar", nullptr));
     } // retranslateUi
 
