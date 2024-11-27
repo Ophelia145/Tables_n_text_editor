@@ -5,6 +5,8 @@
 #-------------------------------------------------
 
 QT       += core gui
+QT += multimedia multimediawidgets
+
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -25,11 +27,17 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+        complexobject.cpp \
+        khai.cpp \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+        shape.cpp
 
 HEADERS += \
-        mainwindow.h
+        complexobject.h \
+        khai.h \
+        mainwindow.h \
+        shape.h
 
 FORMS += \
         mainwindow.ui

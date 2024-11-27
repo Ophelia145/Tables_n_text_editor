@@ -248,8 +248,11 @@ Makefile: ../Table_Text_Editor/Table_Text_Editor.pro ../../../qt/5.12.4/mingw73_
 		../../../qt/5.12.4/mingw73_64/mkspecs/features/yacc.prf \
 		../../../qt/5.12.4/mingw73_64/mkspecs/features/lex.prf \
 		../Table_Text_Editor/Table_Text_Editor.pro \
+		../../../qt/5.12.4/mingw73_64/lib/Qt5MultimediaWidgets.prl \
+		../../../qt/5.12.4/mingw73_64/lib/Qt5Multimedia.prl \
 		../../../qt/5.12.4/mingw73_64/lib/Qt5Widgets.prl \
 		../../../qt/5.12.4/mingw73_64/lib/Qt5Gui.prl \
+		../../../qt/5.12.4/mingw73_64/lib/Qt5Network.prl \
 		../../../qt/5.12.4/mingw73_64/lib/Qt5Core.prl \
 		../../../qt/5.12.4/mingw73_64/lib/qtmain.prl
 	$(QMAKE) -o Makefile ..\Table_Text_Editor\Table_Text_Editor.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
@@ -438,8 +441,11 @@ Makefile: ../Table_Text_Editor/Table_Text_Editor.pro ../../../qt/5.12.4/mingw73_
 ../../../qt/5.12.4/mingw73_64/mkspecs/features/yacc.prf:
 ../../../qt/5.12.4/mingw73_64/mkspecs/features/lex.prf:
 ../Table_Text_Editor/Table_Text_Editor.pro:
+../../../qt/5.12.4/mingw73_64/lib/Qt5MultimediaWidgets.prl:
+../../../qt/5.12.4/mingw73_64/lib/Qt5Multimedia.prl:
 ../../../qt/5.12.4/mingw73_64/lib/Qt5Widgets.prl:
 ../../../qt/5.12.4/mingw73_64/lib/Qt5Gui.prl:
+../../../qt/5.12.4/mingw73_64/lib/Qt5Network.prl:
 ../../../qt/5.12.4/mingw73_64/lib/Qt5Core.prl:
 ../../../qt/5.12.4/mingw73_64/lib/qtmain.prl:
 qmake: FORCE

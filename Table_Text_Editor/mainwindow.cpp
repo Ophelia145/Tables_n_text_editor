@@ -42,7 +42,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(ui->TextSize, QOverload<int>::of(&QSpinBox::valueChanged), this, &MainWindow::on_TextSize_valueChanged);
 
-    connect(ui->TextColor, &QPushButton::clicked, this, &MainWindow::on_TextColor_clicked);
+    //connect(ui->TextColor, &QPushButton::clicked, this, &MainWindow::on_TextColor_clicked);
     connect(ui->fontComboBox, &QFontComboBox::currentFontChanged, this, &MainWindow::changeFont);
 
 
@@ -55,7 +55,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
     documentSaved = true;
-    loadSettings();
+    //loadSettings();
     setupShortcuts();
 }
 
