@@ -27,6 +27,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+        butterfly.cpp \
         complexobject.cpp \
         khai.cpp \
         main.cpp \
@@ -34,6 +35,7 @@ SOURCES += \
         shape.cpp
 
 HEADERS += \
+        butterfly.h \
         complexobject.h \
         khai.h \
         mainwindow.h \
