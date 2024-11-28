@@ -15,8 +15,10 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QFontComboBox>
 #include <QtWidgets/QFormLayout>
+#include <QtWidgets/QGraphicsView>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QGroupBox>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
@@ -40,6 +42,7 @@ public:
     QAction *ActionSave;
     QAction *ActionSearch;
     QAction *ActionReplacement;
+    QAction *actionactionOpen_in_NewWindow;
     QWidget *centralWidget;
     QGridLayout *gridLayout_4;
     QTabWidget *tabWidget;
@@ -84,6 +87,11 @@ public:
     QSpinBox *TextSize;
     QFontComboBox *fontComboBox;
     QWidget *tab_6;
+    QHBoxLayout *horizontalLayout;
+    QGraphicsView *graphicsView;
+    QToolBox *toolBox;
+    QWidget *page;
+    QWidget *page_2;
     QToolBar *toolBar;
     QMenuBar *menuBar;
     QStatusBar *statusBar;
@@ -114,6 +122,8 @@ public:
         ActionSearch->setObjectName(QString::fromUtf8("ActionSearch"));
         ActionReplacement = new QAction(MainWindow);
         ActionReplacement->setObjectName(QString::fromUtf8("ActionReplacement"));
+        actionactionOpen_in_NewWindow = new QAction(MainWindow);
+        actionactionOpen_in_NewWindow->setObjectName(QString::fromUtf8("actionactionOpen_in_NewWindow"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         gridLayout_4 = new QGridLayout(centralWidget);
@@ -352,6 +362,29 @@ public:
         tabWidget->addTab(tab_5, QString());
         tab_6 = new QWidget();
         tab_6->setObjectName(QString::fromUtf8("tab_6"));
+        horizontalLayout = new QHBoxLayout(tab_6);
+        horizontalLayout->setSpacing(6);
+        horizontalLayout->setContentsMargins(11, 11, 11, 11);
+        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        graphicsView = new QGraphicsView(tab_6);
+        graphicsView->setObjectName(QString::fromUtf8("graphicsView"));
+        graphicsView->setMinimumSize(QSize(860, 0));
+
+        horizontalLayout->addWidget(graphicsView);
+
+        toolBox = new QToolBox(tab_6);
+        toolBox->setObjectName(QString::fromUtf8("toolBox"));
+        page = new QWidget();
+        page->setObjectName(QString::fromUtf8("page"));
+        page->setGeometry(QRect(0, 0, 283, 544));
+        toolBox->addItem(page, QString::fromUtf8("Page 1"));
+        page_2 = new QWidget();
+        page_2->setObjectName(QString::fromUtf8("page_2"));
+        page_2->setGeometry(QRect(0, 0, 100, 30));
+        toolBox->addItem(page_2, QString::fromUtf8("Page 2"));
+
+        horizontalLayout->addWidget(toolBox);
+
         tabWidget->addTab(tab_6, QString());
 
         gridLayout_4->addWidget(tabWidget, 0, 0, 1, 1);
@@ -370,8 +403,9 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(1);
         Funcs->setCurrentIndex(1);
+        toolBox->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -385,6 +419,7 @@ public:
         ActionSave->setText(QApplication::translate("MainWindow", "\320\241\320\276\321\205\321\200\320\260\320\275\320\270\321\202\321\214 \321\204\320\260\320\271\320\273", nullptr));
         ActionSearch->setText(QApplication::translate("MainWindow", "\320\237\320\276\320\270\321\201\320\272", nullptr));
         ActionReplacement->setText(QApplication::translate("MainWindow", "\320\227\320\260\320\274\320\265\320\275\320\260", nullptr));
+        actionactionOpen_in_NewWindow->setText(QApplication::translate("MainWindow", "actionOpen_in_NewWindow", nullptr));
         groupBox_4->setTitle(QApplication::translate("MainWindow", "GroupBox", nullptr));
         ALLBOX->setTitle(QApplication::translate("MainWindow", "\320\240\320\260\320\261\320\276\321\202\320\260 \321\201 \321\204\320\260\320\271\320\273\320\260\320\274\320\270", nullptr));
         groupBox_2->setTitle(QString());
@@ -410,6 +445,8 @@ public:
         ColorBackground->setText(QApplication::translate("MainWindow", "\320\246\320\262\320\265\321\202 \321\204\320\276\320\275\320\260", nullptr));
         Funcs->setItemText(Funcs->indexOf(Text), QApplication::translate("MainWindow", "\320\240\320\260\320\261\320\276\321\202\320\260 \321\201 \321\202\320\265\320\272\321\201\321\202\320\276\320\274", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_5), QApplication::translate("MainWindow", "Tab 1", nullptr));
+        toolBox->setItemText(toolBox->indexOf(page), QApplication::translate("MainWindow", "Page 1", nullptr));
+        toolBox->setItemText(toolBox->indexOf(page_2), QApplication::translate("MainWindow", "Page 2", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_6), QApplication::translate("MainWindow", "Tab 2", nullptr));
         toolBar->setWindowTitle(QApplication::translate("MainWindow", "toolBar", nullptr));
     } // retranslateUi

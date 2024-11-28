@@ -28,18 +28,34 @@ CONFIG += c++11
 
 SOURCES += \
         butterfly.cpp \
+        circle.cpp \
         complexobject.cpp \
+        customgraphicsview.cpp \
+        file_funct.cpp \
+        graphics_editor.cpp \
         khai.cpp \
+        line.cpp \
         main.cpp \
         mainwindow.cpp \
-        shape.cpp
+        movabletextitem.cpp \
+        rectangle.cpp \
+        shape.cpp \
+        triangle.cpp
 
 HEADERS += \
         butterfly.h \
+        circle.h \
         complexobject.h \
+        customgraphicsview.h \
+        file_funct.h \
+        graphics_editor.h \
         khai.h \
+        line.h \
         mainwindow.h \
-        shape.h
+        movabletextitem.h \
+        rectangle.h \
+        shape.h \
+        triangle.h
 
 FORMS += \
         mainwindow.ui

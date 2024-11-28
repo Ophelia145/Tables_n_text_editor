@@ -2,10 +2,10 @@
 #define KHAI_H
 #include <complexobject.h>
 
-class khai : public ComplexObject
+class Khai : public ComplexObject
 {
 public:
-    khai();
+    Khai();
 };
 
 #endif // KHAI_H

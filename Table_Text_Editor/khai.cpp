@@ -5,7 +5,7 @@
 #include <QBrush>
 #include <QPen>
 
-khai::khai() : ComplexObject() {
+Khai::Khai() : ComplexObject() {
     qreal x = 0;
     qreal y = 0;
     qreal spacing = 60;
@@ -14,7 +14,7 @@ khai::khai() : ComplexObject() {
     QPen pen(Qt::black);
     pen.setWidth(2);
 
-    // Буква "Х"
+    //буква "Х"
     {
         QGraphicsLineItem* leftDiag = new QGraphicsLineItem(x, y, x + 30, y + 60);
         leftDiag->setPen(pen);
@@ -26,7 +26,7 @@ khai::khai() : ComplexObject() {
     }
     x += spacing;
 
-    // Буква "А"
+    //"А"
     {
         QGraphicsLineItem* leftLine = new QGraphicsLineItem(x, y + 60, x + 15, y);
         leftLine->setPen(pen);
@@ -42,7 +42,7 @@ khai::khai() : ComplexObject() {
     }
     x += spacing;
 
-    // Буква "Й" (как "И" с добавлением диакритического знака)
+    // "Й"
     {
         QGraphicsLineItem* leftLine = new QGraphicsLineItem(x, y, x, y + 60);
         leftLine->setPen(pen);
@@ -63,7 +63,7 @@ khai::khai() : ComplexObject() {
     }
     x += spacing;
 
-    // Буква "Б"
+    // "Б"
     {
         QGraphicsLineItem* leftLine = new QGraphicsLineItem(x, y, x, y + 60);
         leftLine->setPen(pen);
@@ -83,7 +83,7 @@ khai::khai() : ComplexObject() {
     }
     x += spacing;
 
-    // Буква "У"
+    //"У"
     {
         QGraphicsLineItem* leftDiag = new QGraphicsLineItem(x, y, x + 15, y + 30);
         leftDiag->setPen(pen);

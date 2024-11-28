@@ -1,0 +1,17 @@
+release/butterfly.o
+release/circle.o
+release/complexobject.o
+release/customgraphicsview.o
+release/file_funct.o
+release/graphics_editor.o
+release/khai.o
+release/line.o
+release/main.o
+release/mainwindow.o
+release/movabletextitem.o
+release/rectangle.o
+release/shape.o
+release/triangle.o
+release/moc_customgraphicsview.o
+release/moc_graphics_editor.o
+release/moc_mainwindow.o

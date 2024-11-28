@@ -1,11 +1,14 @@
 #ifndef BUTTERFLY_H
 #define BUTTERFLY_H
 
+#include "complexobject.h"
+#include <QGraphicsEllipseItem>
+#include <QGraphicsPolygonItem>
+#include <QTimer>
+class Butterfly : public ComplexObject {
 
-class butterfly
-{
 public:
-    butterfly();
+    Butterfly();
 };
 
 #endif // BUTTERFLY_H
