@@ -74,7 +74,7 @@ void CustomGraphicsView::drawAt(const QPoint &position) {
         brushSize
     );
 
-    // Устанавливаем стиль кисти
+
     QBrush brush(brushColor, brushStyle);
     ellipse->setBrush(brush);
     ellipse->setPen(Qt::NoPen);

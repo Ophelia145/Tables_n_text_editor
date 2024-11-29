@@ -39,6 +39,7 @@ private slots:
 private:
     QGraphicsScene *scene;    // Сцена для отрисовки элементов
     QColor currentBrushColor; // Текущий цвет кисти
+    QColor erasePER;
     qreal currentBrushSize;   // Текущий размер кисти
     Qt::BrushStyle currentBrushStyle; // Текущий стиль кисти
     bool isEraserMode;        // Режим ластика

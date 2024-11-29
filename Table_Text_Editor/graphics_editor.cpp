@@ -38,13 +38,11 @@ GraphicsEditorWindow::GraphicsEditorWindow(QWidget *parent)
     QGraphicsView *view = new CustomGraphicsView(scene, this);
     view->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     view->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    setStyleSheet("QGraphicsView { border: 3px solid black; background-color: white; }");
+    setStyleSheet("QGraphicsView { border: 11px solid black; background-color: white; }");
 
     setCentralWidget(view);
-    setWindowTitle("Graphics Editor");
-
-    // Устанавливаем минимальный и максимальный размер окна
-    setMinimumSize(1600, 1200);  // Минимальный размер окна
+    setWindowTitle("Little Editor ^^");
+    setMinimumSize(1600, 1200);
     setAcceptDrops(true);     // Разрешаем перетаскивание
 
     // Создаем панель инструментов
@@ -106,7 +104,6 @@ GraphicsEditorWindow::GraphicsEditorWindow(QWidget *parent)
     toolbar->addAction(brushSizeAction);
     connect(brushSizeAction, &QAction::triggered, this, &GraphicsEditorWindow::setBrushSize);
 
-    // Кнопка для ластика
     QAction *eraserAction = new QAction(QIcon(":/res/res/rubber.png"),"Eraser", this);
     toolbar->addAction(eraserAction);
     connect(eraserAction, &QAction::triggered, this, &GraphicsEditorWindow::setEraser);
@@ -128,17 +125,17 @@ GraphicsEditorWindow::GraphicsEditorWindow(QWidget *parent)
 
 
      QTimer *timer = new QTimer(this);
-     timer->start(16); // Set the timer interval (e.g., 16 ms for ~60 FPS)
+     timer->start(10); // Set the timer interval (e.g., 16 ms for ~60 FPS)
 
      Butterfly *butterfly = new Butterfly();
-     butterfly->setPos(200, 400);
+     butterfly->setPos(200, 200);
      connect(timer, &QTimer::timeout, [butterfly, view]() { butterfly->move(view); }); // Передаем представление в функцию перемещения
      scene->addItem(butterfly);
 
      Khai* khai = new Khai();
      scene->addItem(khai);
      connect(timer, &QTimer::timeout, [khai, view]() { khai->move(view); });
-     khai->setPos(450, 450);
+     khai->setPos(800, 550);
 
 
      Flower *flower = new Flower();
@@ -169,7 +166,7 @@ void GraphicsEditorWindow::addCircle() {
     if (!ok) return;
 
     // Выбор цвета заливки
-    QColor fillColor = QColorDialog::getColor(Qt::blue, this, "Select Fill Color");
+    QColor fillColor = QColorDialog::getColor(Qt::green, this, "Select Fill Color");
     if (!fillColor.isValid()) return;
 
     // Выбор цвета обводки
@@ -249,7 +246,7 @@ void GraphicsEditorWindow::setBrushSize() {
 }
 
 void GraphicsEditorWindow::setBrushColor() {
-    QColor color = QColorDialog::getColor(Qt::blue, this, "Select Brush Color");
+    QColor color = QColorDialog::getColor(Qt::red, this, "Select Brush Color");
     if (color.isValid()) {
         currentBrushColor = color;
         isEraserMode = false;
@@ -259,7 +256,7 @@ void GraphicsEditorWindow::setBrushColor() {
 
 void GraphicsEditorWindow::setEraser() {
     isEraserMode = true;
-    static_cast<CustomGraphicsView*>(centralWidget())->setBrushColor(Qt::white);
+    static_cast<CustomGraphicsView*>(centralWidget())->setBrushColor(erasePER);
 }
 
 void GraphicsEditorWindow::changeBackgroundColor() {
@@ -268,11 +265,11 @@ void GraphicsEditorWindow::changeBackgroundColor() {
         scene->setBackgroundBrush(color);
         if (isEraserMode) {
             static_cast<CustomGraphicsView*>(centralWidget())->setBrushColor(color);
+            erasePER = color;
         }
     }
 }
 
-// Слот для добавлеия текста
 void GraphicsEditorWindow::addText() {
     // Запрашиваем текст
     bool ok;
