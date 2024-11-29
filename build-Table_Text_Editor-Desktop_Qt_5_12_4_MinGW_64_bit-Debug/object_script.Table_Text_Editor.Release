@@ -2,8 +2,10 @@ release/butterfly.o
 release/circle.o
 release/complexobject.o
 release/customgraphicsview.o
+release/flower.o
 release/graphics_editor.o
 release/khai.o
+release/kolg.o
 release/line.o
 release/main.o
 release/mainwindow.o

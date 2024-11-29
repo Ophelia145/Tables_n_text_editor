@@ -70,7 +70,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     GraphicsEditorWindow *editorWindow = new GraphicsEditorWindow(this);
 
-    // Создаем вкладки (если еще не созданы)
     QTabWidget *tabWidget = new QTabWidget(this);
     tabWidget->addTab(new QWidget(), "Tab 1");  // Первая вкладка
     tabWidget->addTab(new QWidget(), "Tab 2");  // Вторая вкладка для редактора

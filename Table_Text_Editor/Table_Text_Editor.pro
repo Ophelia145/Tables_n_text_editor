@@ -31,8 +31,10 @@ SOURCES += \
         circle.cpp \
         complexobject.cpp \
         customgraphicsview.cpp \
+        flower.cpp \
         graphics_editor.cpp \
         khai.cpp \
+        kolg.cpp \
         line.cpp \
         main.cpp \
         mainwindow.cpp \
@@ -47,8 +49,10 @@ HEADERS += \
         complexobject.h \
         customgraphicsview.h \
         file_funct.h \
+        flower.h \
         graphics_editor.h \
         khai.h \
+        kolg.h \
         line.h \
         mainwindow.h \
         movabletextitem.h \

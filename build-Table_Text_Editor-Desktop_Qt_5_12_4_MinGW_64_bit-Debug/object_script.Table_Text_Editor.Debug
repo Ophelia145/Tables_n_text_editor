@@ -2,8 +2,10 @@ debug/butterfly.o
 debug/circle.o
 debug/complexobject.o
 debug/customgraphicsview.o
+debug/flower.o
 debug/graphics_editor.o
 debug/khai.o
+debug/kolg.o
 debug/line.o
 debug/main.o
 debug/mainwindow.o

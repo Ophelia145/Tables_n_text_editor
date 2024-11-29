@@ -25,6 +25,9 @@
 #include "QtMath"
 #include "complexobject.h"
 #include "khai.h"
+#include "kolg.h"
+#include "flower.h"
+
 
 
 GraphicsEditorWindow::GraphicsEditorWindow(QWidget *parent)
@@ -47,17 +50,17 @@ GraphicsEditorWindow::GraphicsEditorWindow(QWidget *parent)
     // Создаем панель инструментов
     QToolBar *toolbar = addToolBar("Shapes");
 
-    QAction *addTextAction = new QAction(QIcon(":/res/res/free-icon-text-3721901.png"),"Add Text", this);
+    QAction *addTextAction = new QAction(QIcon(":/res/res/Text.png"),"Add Text", this);
     toolbar->addAction(addTextAction);
     connect(addTextAction, &QAction::triggered, this, &GraphicsEditorWindow::addText);
 
     // Добавляем кнопку для сохранения изображения
-    QAction *saveAction = new QAction(QIcon(":/res/res/free-icon-save-button-4148884.png"),"Save", this);
+    QAction *saveAction = new QAction(QIcon(":/res/res/SAVE.png"),"Save", this);
     toolbar->addAction(saveAction);
     connect(saveAction, &QAction::triggered, this, &GraphicsEditorWindow::saveImage);
 
     // Кнопка для удаления выбранного элемента
-    QAction *deleteAction = new QAction(QIcon(":/res/res/free-icon-delete-1214594.png"),"Delete", this);
+    QAction *deleteAction = new QAction(QIcon(":/res/res/TRASH.png"),"Delete", this);
     toolbar->addAction(deleteAction);
     connect(deleteAction, &QAction::triggered, this, &GraphicsEditorWindow::deleteSelectedItem);
 
@@ -67,22 +70,22 @@ GraphicsEditorWindow::GraphicsEditorWindow(QWidget *parent)
     connect(addCircleAction, &QAction::triggered, this, &GraphicsEditorWindow::addCircle);
 
     // Добавляем кнопку для прямоугольника
-    QAction *addRectangleAction = new QAction(QIcon(":/res/res/free-icon-square-15704779.png"),"Add Rectangle", this);
+    QAction *addRectangleAction = new QAction(QIcon(":/res/res/RECTANGLE.png"),"Add Rectangle", this);
     toolbar->addAction(addRectangleAction);
     connect(addRectangleAction, &QAction::triggered, this, &GraphicsEditorWindow::addRectangle);
 
     // Добавляем кнопку для треугольника
-    QAction *addTriangleAction = new QAction(QIcon(":/res/res/free-icon-triangle-15704787.png"),"Add Triangle", this);
+    QAction *addTriangleAction = new QAction(QIcon(":/res/res/Triangle.png"),"Add Triangle", this);
     toolbar->addAction(addTriangleAction);
     connect(addTriangleAction, &QAction::triggered, this, &GraphicsEditorWindow::addTriangle);
 
     // Добавляем кнопку для линии
-    QAction *addLineAction = new QAction(QIcon(":/res/res/free-icon-line-2708438.png"),"Add Line", this);
+    QAction *addLineAction = new QAction(QIcon(":/res/res/LIne-649686.png"),"Add Line", this);
     toolbar->addAction(addLineAction);
     connect(addLineAction, &QAction::triggered, this, &GraphicsEditorWindow::addLine);
 
     // Добавляем кнопку для импорта изображения
-    QAction *importAction = new QAction(QIcon(":/res/res/free-icon-image-11429526.png"),"Import Image", this);
+    QAction *importAction = new QAction(QIcon(":/res/res/IMPORTT6.png"),"Import Image", this);
     toolbar->addAction(importAction);
     connect(importAction, &QAction::triggered, this, &GraphicsEditorWindow::importImage);
 
@@ -93,7 +96,7 @@ GraphicsEditorWindow::GraphicsEditorWindow(QWidget *parent)
     connect(backgroundAction, &QAction::triggered, this, &GraphicsEditorWindow::changeBackgroundColor);
 
     // Кнопка для изменения цвета кисти
-    QAction *brushColorAction = new QAction(QIcon(":/res/res/free-icon-color-palette-7168912.png"),"Brush Color", this);
+    QAction *brushColorAction = new QAction(QIcon(":/res/res/COLOR.png"),"Brush Color", this);
     toolbar->addAction(brushColorAction);
     connect(brushColorAction, &QAction::triggered, this, &GraphicsEditorWindow::setBrushColor);
 
@@ -136,6 +139,19 @@ GraphicsEditorWindow::GraphicsEditorWindow(QWidget *parent)
      scene->addItem(khai);
      connect(timer, &QTimer::timeout, [khai, view]() { khai->move(view); });
      khai->setPos(450, 450);
+
+
+     Flower *flower = new Flower();
+     flower->setPos(300, 700);
+     connect(timer, &QTimer::timeout, [flower, view]() { flower->move(view); }); // Передаем представление в функцию перемещения
+     scene->addItem(flower);
+
+
+     Kolginova* kolg = new Kolginova();
+     scene->addItem(kolg);
+     connect(timer, &QTimer::timeout, [kolg, view]() { kolg->move(view); });
+     kolg->setPos(650, 650);
+
 
 
 }
