@@ -28,17 +28,17 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     GraphicsEditorWindow *editorWindow = new GraphicsEditorWindow(this);
 
-    QTabWidget *tabWidget = new QTabWidget(this);
+    //QTabWidget *tabWidget = new QTabWidget(this);
 
 
 
-    QWidget *textTablesWidget = new QWidget();
-        QVBoxLayout *layout = new QVBoxLayout(textTablesWidget);
+    //QWidget *textTablesWidget = new QWidget();
+        //QVBoxLayout *layout = new QVBoxLayout(textTablesWidget);
 
-        QTabWidget *localTabWidget = new QTabWidget(textTablesWidget);
-        localTabWidget->addTab(ui->tab_5, "Tab 1");  // Добавляем оригинал
+//        QTabWidget *localTabWidget = new QTabWidget(textTablesWidget);
+//        localTabWidget->addTab(ui->tab_5, "Tab 1");  // Добавляем оригинал
 
-        layout->addWidget(localTabWidget);
+//        layout->addWidget(localTabWidget);
 
 
     connect(ui->ActionCreateNew, &QAction::triggered, this, &MainWindow::newFile);
@@ -75,22 +75,19 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
 
-    tabWidget->addTab(new QWidget(), "Текст_Таблицы");  // Первая вкладка
-    tabWidget->addTab(new QWidget(), "Графика");  // Вторая вкладка для редактора
+    //tabWidget->addTab(new QWidget(), "Текст_Таблицы");  // Первая вкладка
+    //tabWidget->addTab(new QWidget(), "Графика");  // Вторая вкладка для редактора
 
-    // Подключаем сигнал изменения вкладки
-    connect(tabWidget, &QTabWidget::currentChanged, this, [this, editorWindow, tabWidget](int index) {
-        if (index == 1) {  // Вкладка tab2 имеет индекс 1
-            // Показываем редактор при переходе на tab2
-            editorWindow->show();
+    connect(ui->tabWidget, &QTabWidget::currentChanged, this, [this, editorWindow](int index) {
+        if (ui->tabWidget->widget(index) == ui->tab_6) {  // Проверка на активность tab_6
+            editorWindow->show();  // Показываем графический редактор
         } else {
-            // Скрываем редактор, если пользователь на другой вкладке
-            editorWindow->hide();
+            editorWindow->hide();  // Скрываем графический редактор
         }
     });
 
-    // Добавляем табличный виджет в основной layout
-    setCentralWidget(tabWidget);
+
+        setCentralWidget(ui->tabWidget);
 
 }
 
