@@ -42,7 +42,7 @@ GraphicsEditorWindow::GraphicsEditorWindow(QWidget *parent)
 
     setCentralWidget(view);
     setWindowTitle("Little Editor ^^");
-    setMinimumSize(1600, 1200);
+    setMinimumSize(1550, 980);
     setAcceptDrops(true);     // Разрешаем перетаскивание
 
     // Создаем панель инструментов
@@ -375,7 +375,7 @@ void GraphicsEditorWindow::addRectangle() {
     rect->setPos(100, 200);
 }
 
-// Конструктор и слот для добавления треугольника
+
 void GraphicsEditorWindow::addTriangle() {
     // Запрашиваем основание и высоту
     bool ok;

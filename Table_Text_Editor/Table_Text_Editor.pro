@@ -8,6 +8,8 @@ QT       += core gui
 QT += multimedia multimediawidgets
 
 
+
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = Table_Text_Editor

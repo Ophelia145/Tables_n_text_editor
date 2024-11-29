@@ -31,7 +31,7 @@ void CustomGraphicsView::mousePressEvent(QMouseEvent *event) {
 
 void CustomGraphicsView::dragEnterEvent(QDragEnterEvent *event) {
     if (event->mimeData()->hasImage()) {
-        event->acceptProposedAction(); // Разрешаем перетаскивание изображений
+        event->acceptProposedAction(); //разрешаем перетаскивание изображений
     } else {
         QGraphicsView::dragEnterEvent(event);
     }
@@ -41,9 +41,9 @@ void CustomGraphicsView::dropEvent(QDropEvent *event) {
     if (event->mimeData()->hasImage()) {
         QPixmap pixmap = qvariant_cast<QPixmap>(event->mimeData()->imageData());
         QGraphicsPixmapItem *item = new QGraphicsPixmapItem(pixmap);
-        item->setPos(mapToScene(event->pos())); // Устанавливаем позицию изображения на сцене
-        scene()->addItem(item);                 // Добавляем изображение на сцену
-        event->acceptProposedAction();          // Принимаем перетаскивание
+        item->setPos(mapToScene(event->pos()));
+        scene()->addItem(item);
+        event->acceptProposedAction();          //перетаскивание
     } else {
         QGraphicsView::dropEvent(event);
     }

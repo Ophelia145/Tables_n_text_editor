@@ -8,11 +8,40 @@
 #include <QDebug>
 
 ComplexObject::ComplexObject() : dx(1), dy(1) {
-    // Initialize the sound effect
-    collisionSound.setSource(QUrl::fromLocalFile("C://collision.wav"));
-    collisionSound.setVolume(0.5);
+    collisionSound.setMedia(QUrl::fromLocalFile("../src/MEOW1.mp3"));
+    collisionSound.setVolume(100);
 }
 
+void ComplexObject::checkCollision() {
+    if (collidesWithWalls()) {
+        collisionSound.play();
+    }
+}
+
+bool ComplexObject::collidesWithWalls() {
+    if (!scene()) return false;
+
+    QRectF sceneBounds = scene()->sceneRect();  //gраницы сцены
+    QRectF objectBounds = this->boundingRect();  //границы объекта
+
+    QPointF pos = this->pos();  //текущ положение объекта
+
+    //проверка на верхней или нижней границ
+    if (pos.y() + objectBounds.top() <= sceneBounds.top() ||
+        pos.y() + objectBounds.bottom() >= sceneBounds.bottom()) {
+        dy = -dy;  //меняем направление по оси Y
+        return true;
+    }
+
+    //проверка на столкновение с левой или правой границей
+    if (pos.x() + objectBounds.left() <= sceneBounds.left() ||
+        pos.x() + objectBounds.right() >= sceneBounds.right()) {
+        dx = -dx;  //меняем направление по оси X
+        return true;
+    }
+
+    return false;  //столкновения нет
+}
 
 ComplexObject::~ComplexObject() {
     qDeleteAll(items);
@@ -44,15 +73,11 @@ void ComplexObject::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
 
 void ComplexObject::move(QGraphicsView *view) {
     QGraphicsScene *scene = view->scene();
-
-    // Move the object
     setPos(x() + dx, y() + dy);
 
-    // Convert the view's rectangle to the scene's coordinate system
     QRectF viewRect = view->mapToScene(view->viewport()->rect()).boundingRect();
     QRectF objectRect = boundingRect().translated(pos());
 
-    // Check for collisions with the view boundaries
     if (objectRect.left() < viewRect.left() || objectRect.right() > viewRect.right() ||
         objectRect.top() < viewRect.top() || objectRect.bottom() > viewRect.bottom()) {
         dx = -dx; // Reverse direction on x-axis

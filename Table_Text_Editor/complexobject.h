@@ -20,12 +20,15 @@ public:
     QRectF boundingRect() const override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
     void move(QGraphicsView *view);
-
+    void checkCollision();
+    bool collidesWithWalls();
+protected:
+    qreal dx, dy;  // Направления движения
+    QMediaPlayer collisionSound;  // Звук столкновения
 private:
     QList<QGraphicsItem*> items;
-    qreal dx; // Change in x-direction
-    qreal dy; // Change in y-direction
-    QSoundEffect collisionSound; // Sound effect for collisions
+
+
 
 };
 

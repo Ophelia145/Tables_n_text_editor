@@ -13,13 +13,8 @@
 #include <QTextTableCell>
 #include <QSpinBox>
 #include<QInputDialog>
-
-
-
-
-
-
-
+#include <QVBoxLayout>
+#include <QLabel>
 
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -41,7 +36,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
 
-
     connect(ui->pushButton, &QPushButton::clicked, this, &MainWindow::addTable);
     connect(ui->pushButton_2, &QPushButton::clicked, this, &MainWindow::addColumn);
     connect(ui->pushButton_3, &QPushButton::clicked, this, &MainWindow::addRow);
@@ -54,14 +48,8 @@ MainWindow::MainWindow(QWidget *parent) :
     //connect(ui->TextColor, &QPushButton::clicked, this, &MainWindow::on_TextColor_clicked);
     connect(ui->fontComboBox, &QFontComboBox::currentFontChanged, this, &MainWindow::changeFont);
 
-
-
-
     ui->TextSize->setRange(8, 72);
     ui->TextSize->setValue(12);
-
-
-
 
     documentSaved = true;
     //loadSettings();
@@ -71,8 +59,8 @@ MainWindow::MainWindow(QWidget *parent) :
     GraphicsEditorWindow *editorWindow = new GraphicsEditorWindow(this);
 
     QTabWidget *tabWidget = new QTabWidget(this);
-    tabWidget->addTab(new QWidget(), "Tab 1");  // Первая вкладка
-    tabWidget->addTab(new QWidget(), "Tab 2");  // Вторая вкладка для редактора
+    tabWidget->addTab(new QWidget(), "Текст_Таблицы");  // Первая вкладка
+    tabWidget->addTab(new QWidget(), "Графика");  // Вторая вкладка для редактора
 
     // Подключаем сигнал изменения вкладки
     connect(tabWidget, &QTabWidget::currentChanged, this, [this, editorWindow, tabWidget](int index) {
@@ -89,6 +77,56 @@ MainWindow::MainWindow(QWidget *parent) :
     setCentralWidget(tabWidget);
 
 }
+
+    // Вкладка "Текст_Таблицы"
+    QWidget *textTablesWidget = new QWidget();
+    QVBoxLayout *textTablesLayout = new QVBoxLayout(textTablesWidget);
+
+    // Placeholder для XML интерфейса
+    QLabel *xmlPlaceholder = new QLabel("Здесь будет XML UI", textTablesWidget);
+    xmlPlaceholder->setAlignment(Qt::AlignCenter);
+    textTablesLayout->addWidget(xmlPlaceholder);
+
+    tabWidget->addTab(textTablesWidget, "Текст_Таблицы");
+
+    // Вкладка "Графика"
+    tabWidget->addTab(new QWidget(), "Графика");
+
+    // Подключение события смены вкладок
+    connect(tabWidget, &QTabWidget::currentChanged, this, [editorWindow, tabWidget, xmlPlaceholder](int index) {
+        if (index == 1) {  // Переход на вкладку "Графика"
+            editorWindow->show();
+        } else if (index == 0) {
+            editorWindow->hide();
+            xmlPlaceholder->setText("Интерфейс будет здесь загружен");
+        }
+    });
+
+    setCentralWidget(tabWidget);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 MainWindow::~MainWindow()
 {

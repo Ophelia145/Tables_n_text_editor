@@ -158,12 +158,20 @@ compiler_rcc_clean:
 	-$(DEL_FILE) release\qrc_res.cpp
 release/qrc_res.cpp: ../src/res.qrc \
 		../../../qt/5.12.4/mingw73_64/bin/rcc.exe \
+		../src/COLOR.png \
+		../src/TRASH.png \
 		../src/circle.png \
+		../src/Text.png \
+		../src/Triangle.png \
 		../src/pencil.png \
+		../src/IMPORTT6.png \
 		../src/paint.png \
 		../src/ellipse.png \
 		../src/kist.png \
-		../src/rubber.png
+		../src/RECTANGLE.png \
+		../src/rubber.png \
+		../src/LIne-649686.png \
+		../src/SAVE.png
 	D:\vispro\qt\5.12.4\mingw73_64\bin\rcc.exe -name res ..\src\res.qrc -o release\qrc_res.cpp
 
 compiler_moc_predefs_make_all: release/moc_predefs.h
@@ -1491,7 +1499,10 @@ release/graphics_editor.o: ../Table_Text_Editor/graphics_editor.cpp ../Table_Tex
 		../../../qt/5.12.4/mingw73_64/include/QtWidgets/QGraphicsPolygonItem \
 		../../../qt/5.12.4/mingw73_64/include/QtCore/QtMath \
 		../../../qt/5.12.4/mingw73_64/include/QtCore/qmath.h \
-		../Table_Text_Editor/khai.h
+		../Table_Text_Editor/khai.h \
+		../Table_Text_Editor/kolg.h \
+		../Table_Text_Editor/flower.h \
+		../../../qt/5.12.4/mingw73_64/include/QtWidgets/QGraphicsRectItem
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\graphics_editor.o ..\Table_Text_Editor\graphics_editor.cpp
 
 release/khai.o: ../Table_Text_Editor/khai.cpp ../Table_Text_Editor/khai.h \
@@ -1645,7 +1656,10 @@ release/khai.o: ../Table_Text_Editor/khai.cpp ../Table_Text_Editor/khai.h \
 		../../../qt/5.12.4/mingw73_64/include/QtGui/QPen
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\khai.o ..\Table_Text_Editor\khai.cpp
 
-release/kolg.o: ../Table_Text_Editor/kolg.cpp ../../../qt/5.12.4/mingw73_64/include/QtWidgets/QGraphicsRectItem \
+release/kolg.o: ../Table_Text_Editor/kolg.cpp ../Table_Text_Editor/kolg.h \
+		../Table_Text_Editor/complexobject.h \
+		../Table_Text_Editor/shape.h \
+		../../../qt/5.12.4/mingw73_64/include/QtWidgets/QGraphicsItem \
 		../../../qt/5.12.4/mingw73_64/include/QtWidgets/qgraphicsitem.h \
 		../../../qt/5.12.4/mingw73_64/include/QtWidgets/qtwidgetsglobal.h \
 		../../../qt/5.12.4/mingw73_64/include/QtGui/qtguiglobal.h \
@@ -1733,12 +1747,64 @@ release/kolg.o: ../Table_Text_Editor/kolg.cpp ../../../qt/5.12.4/mingw73_64/incl
 		../../../qt/5.12.4/mingw73_64/include/QtGui/qimage.h \
 		../../../qt/5.12.4/mingw73_64/include/QtGui/qpixelformat.h \
 		../../../qt/5.12.4/mingw73_64/include/QtGui/qtransform.h \
+		../../../qt/5.12.4/mingw73_64/include/QtGui/QPainter \
+		../../../qt/5.12.4/mingw73_64/include/QtGui/qpainter.h \
+		../../../qt/5.12.4/mingw73_64/include/QtGui/qtextoption.h \
+		../../../qt/5.12.4/mingw73_64/include/QtGui/qpen.h \
+		../../../qt/5.12.4/mingw73_64/include/QtGui/qbrush.h \
+		../../../qt/5.12.4/mingw73_64/include/QtGui/qfontinfo.h \
+		../../../qt/5.12.4/mingw73_64/include/QtGui/qfont.h \
+		../../../qt/5.12.4/mingw73_64/include/QtGui/qfontmetrics.h \
+		../../../qt/5.12.4/mingw73_64/include/QtWidgets/QGraphicsSceneMouseEvent \
+		../../../qt/5.12.4/mingw73_64/include/QtWidgets/qgraphicssceneevent.h \
+		../../../qt/5.12.4/mingw73_64/include/QtGui/QList \
+		../../../qt/5.12.4/mingw73_64/include/QtGui/qevent.h \
+		../../../qt/5.12.4/mingw73_64/include/QtGui/qkeysequence.h \
+		../../../qt/5.12.4/mingw73_64/include/QtCore/qurl.h \
+		../../../qt/5.12.4/mingw73_64/include/QtCore/qurlquery.h \
+		../../../qt/5.12.4/mingw73_64/include/QtCore/qfile.h \
+		../../../qt/5.12.4/mingw73_64/include/QtCore/qfiledevice.h \
+		../../../qt/5.12.4/mingw73_64/include/QtGui/qvector2d.h \
+		../../../qt/5.12.4/mingw73_64/include/QtGui/qtouchdevice.h \
+		../../../qt/5.12.4/mingw73_64/include/QtCore/QTimer \
+		../../../qt/5.12.4/mingw73_64/include/QtCore/qtimer.h \
+		../../../qt/5.12.4/mingw73_64/include/QtCore/qbasictimer.h \
+		../../../qt/5.12.4/mingw73_64/include/QtWidgets/QGraphicsView \
+		../../../qt/5.12.4/mingw73_64/include/QtWidgets/qgraphicsview.h \
+		../../../qt/5.12.4/mingw73_64/include/QtWidgets/qscrollarea.h \
+		../../../qt/5.12.4/mingw73_64/include/QtWidgets/qabstractscrollarea.h \
+		../../../qt/5.12.4/mingw73_64/include/QtWidgets/qframe.h \
+		../../../qt/5.12.4/mingw73_64/include/QtWidgets/qwidget.h \
+		../../../qt/5.12.4/mingw73_64/include/QtGui/qpalette.h \
+		../../../qt/5.12.4/mingw73_64/include/QtWidgets/qsizepolicy.h \
+		../../../qt/5.12.4/mingw73_64/include/QtGui/qcursor.h \
+		../../../qt/5.12.4/mingw73_64/include/QtWidgets/qgraphicsscene.h \
+		../../../qt/5.12.4/mingw73_64/include/QtMultimedia/QSoundEffect \
+		../../../qt/5.12.4/mingw73_64/include/QtMultimedia/qsoundeffect.h \
+		../../../qt/5.12.4/mingw73_64/include/QtMultimedia/qtmultimediaglobal.h \
+		../../../qt/5.12.4/mingw73_64/include/QtMultimedia/qtmultimedia-config.h \
+		../../../qt/5.12.4/mingw73_64/include/QtMultimedia/QMediaPlayer \
+		../../../qt/5.12.4/mingw73_64/include/QtMultimedia/qmediaplayer.h \
+		../../../qt/5.12.4/mingw73_64/include/QtMultimedia/qmediaobject.h \
+		../../../qt/5.12.4/mingw73_64/include/QtMultimedia/qmultimedia.h \
+		../../../qt/5.12.4/mingw73_64/include/QtMultimedia/qmediacontent.h \
+		../../../qt/5.12.4/mingw73_64/include/QtMultimedia/qmediaresource.h \
+		../../../qt/5.12.4/mingw73_64/include/QtNetwork/qnetworkrequest.h \
+		../../../qt/5.12.4/mingw73_64/include/QtNetwork/qtnetworkglobal.h \
+		../../../qt/5.12.4/mingw73_64/include/QtNetwork/qtnetwork-config.h \
+		../../../qt/5.12.4/mingw73_64/include/QtCore/QSharedDataPointer \
+		../../../qt/5.12.4/mingw73_64/include/QtCore/QString \
+		../../../qt/5.12.4/mingw73_64/include/QtCore/QUrl \
+		../../../qt/5.12.4/mingw73_64/include/QtCore/QVariant \
+		../../../qt/5.12.4/mingw73_64/include/QtMultimedia/qmediaenumdebug.h \
+		../../../qt/5.12.4/mingw73_64/include/QtCore/qmetaobject.h \
+		../../../qt/5.12.4/mingw73_64/include/QtMultimedia/qaudio.h \
+		../../../qt/5.12.4/mingw73_64/include/QtNetwork/qnetworkconfiguration.h \
+		../../../qt/5.12.4/mingw73_64/include/QtWidgets/QGraphicsRectItem \
 		../../../qt/5.12.4/mingw73_64/include/QtWidgets/QGraphicsLineItem \
 		../../../qt/5.12.4/mingw73_64/include/QtWidgets/QGraphicsEllipseItem \
 		../../../qt/5.12.4/mingw73_64/include/QtGui/QBrush \
-		../../../qt/5.12.4/mingw73_64/include/QtGui/qbrush.h \
-		../../../qt/5.12.4/mingw73_64/include/QtGui/QPen \
-		../../../qt/5.12.4/mingw73_64/include/QtGui/qpen.h
+		../../../qt/5.12.4/mingw73_64/include/QtGui/QPen
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\kolg.o ..\Table_Text_Editor\kolg.cpp
 
 release/line.o: ../Table_Text_Editor/line.cpp ../../../qt/5.12.4/mingw73_64/include/QtGui/QPainter \

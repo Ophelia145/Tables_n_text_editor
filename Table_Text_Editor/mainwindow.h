@@ -37,6 +37,9 @@ private slots:
     void changeFont(const QFont &font);
 
 
+
+
+
     void addTable();
     void addColumn();
     void addRow();
@@ -54,6 +57,8 @@ private:
     void setupControlPanel();
     void setupShortcuts();
     bool promptSaveIfModified();
+
+    QWidget *textTablesWidget;
 
     QSettings settings;
     QString currentFilePath;
