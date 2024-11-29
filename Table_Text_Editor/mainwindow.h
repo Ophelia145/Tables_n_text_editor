@@ -58,7 +58,6 @@ private:
     void setupShortcuts();
     bool promptSaveIfModified();
 
-    QWidget *textTablesWidget;
 
     QSettings settings;
     QString currentFilePath;

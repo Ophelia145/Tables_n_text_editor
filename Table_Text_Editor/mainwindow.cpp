@@ -17,11 +17,29 @@
 #include <QLabel>
 
 
+
+
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+
     ui->setupUi(this);
+    GraphicsEditorWindow *editorWindow = new GraphicsEditorWindow(this);
+
+    QTabWidget *tabWidget = new QTabWidget(this);
+
+
+
+    QWidget *textTablesWidget = new QWidget();
+        QVBoxLayout *layout = new QVBoxLayout(textTablesWidget);
+
+        QTabWidget *localTabWidget = new QTabWidget(textTablesWidget);
+        localTabWidget->addTab(ui->tab_5, "Tab 1");  // Добавляем оригинал
+
+        layout->addWidget(localTabWidget);
+
 
     connect(ui->ActionCreateNew, &QAction::triggered, this, &MainWindow::newFile);
     connect(ui->ActionOpenFile, &QAction::triggered, this, &MainWindow::openFile);
@@ -56,9 +74,7 @@ MainWindow::MainWindow(QWidget *parent) :
     setupShortcuts();
 
 
-    GraphicsEditorWindow *editorWindow = new GraphicsEditorWindow(this);
 
-    QTabWidget *tabWidget = new QTabWidget(this);
     tabWidget->addTab(new QWidget(), "Текст_Таблицы");  // Первая вкладка
     tabWidget->addTab(new QWidget(), "Графика");  // Вторая вкладка для редактора
 
@@ -77,56 +93,6 @@ MainWindow::MainWindow(QWidget *parent) :
     setCentralWidget(tabWidget);
 
 }
-
-    // Вкладка "Текст_Таблицы"
-    QWidget *textTablesWidget = new QWidget();
-    QVBoxLayout *textTablesLayout = new QVBoxLayout(textTablesWidget);
-
-    // Placeholder для XML интерфейса
-    QLabel *xmlPlaceholder = new QLabel("Здесь будет XML UI", textTablesWidget);
-    xmlPlaceholder->setAlignment(Qt::AlignCenter);
-    textTablesLayout->addWidget(xmlPlaceholder);
-
-    tabWidget->addTab(textTablesWidget, "Текст_Таблицы");
-
-    // Вкладка "Графика"
-    tabWidget->addTab(new QWidget(), "Графика");
-
-    // Подключение события смены вкладок
-    connect(tabWidget, &QTabWidget::currentChanged, this, [editorWindow, tabWidget, xmlPlaceholder](int index) {
-        if (index == 1) {  // Переход на вкладку "Графика"
-            editorWindow->show();
-        } else if (index == 0) {
-            editorWindow->hide();
-            xmlPlaceholder->setText("Интерфейс будет здесь загружен");
-        }
-    });
-
-    setCentralWidget(tabWidget);
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 MainWindow::~MainWindow()
 {
