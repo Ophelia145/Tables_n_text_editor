@@ -19,7 +19,7 @@
 #include <QFontDialog>
 #include <QGraphicsPixmapItem>
 #include <QComboBox>
-#include "CustomGraphicsView.h"
+#include "customgraphicsview.h"
 #include "movabletextitem.h"
 #include "butterfly.h"
 #include "QtMath"
@@ -62,7 +62,7 @@ GraphicsEditorWindow::GraphicsEditorWindow(QWidget *parent)
     connect(deleteAction, &QAction::triggered, this, &GraphicsEditorWindow::deleteSelectedItem);
 
     // Добавляем кнопку для круга
-    QAction *addCircleAction = new QAction(QIcon(":/res/res/free-icon-circle-15704721.png"),"Add Circle", this);
+    QAction *addCircleAction = new QAction(QIcon(":/res/res/circle.png"),"Add Circle", this);
     toolbar->addAction(addCircleAction);
     connect(addCircleAction, &QAction::triggered, this, &GraphicsEditorWindow::addCircle);
 
@@ -88,7 +88,7 @@ GraphicsEditorWindow::GraphicsEditorWindow(QWidget *parent)
 
 
     // Кнопка для изменения фона
-    QAction *backgroundAction = new QAction(QIcon(":/res/res/free-icon-paint-bucket-4552857.png"),"Background Color", this);
+    QAction *backgroundAction = new QAction(QIcon(":/res/res/paint.png"),"Background Color", this);
     toolbar->addAction(backgroundAction);
     connect(backgroundAction, &QAction::triggered, this, &GraphicsEditorWindow::changeBackgroundColor);
 
@@ -99,12 +99,12 @@ GraphicsEditorWindow::GraphicsEditorWindow(QWidget *parent)
 
 
     // Кнопка для изменения размера кисти
-    QAction *brushSizeAction = new QAction(QIcon(":/res/res/free-icon-brush-4927194.png"),"Brush Size", this);
+    QAction *brushSizeAction = new QAction(QIcon(":/res/res/kist.png"),"Brush Size", this);
     toolbar->addAction(brushSizeAction);
     connect(brushSizeAction, &QAction::triggered, this, &GraphicsEditorWindow::setBrushSize);
 
     // Кнопка для ластика
-    QAction *eraserAction = new QAction(QIcon(":/res/res/free-icon-eraser-7358765.png"),"Eraser", this);
+    QAction *eraserAction = new QAction(QIcon(":/res/res/rubber.png"),"Eraser", this);
     toolbar->addAction(eraserAction);
     connect(eraserAction, &QAction::triggered, this, &GraphicsEditorWindow::setEraser);
 
@@ -183,7 +183,7 @@ void GraphicsEditorWindow::saveImage() {
         // Отрисовываем сцену на QPixmap
         scene->render(&painter);
 
-        // Сохраняем изображение в фа��л
+        // Сохраняем изображение в фал
         pixmap.save(filePath, "PNG");
     }
 }
@@ -355,7 +355,7 @@ void GraphicsEditorWindow::addRectangle() {
 
     QBrush brush(fillColor);
     QPen pen(borderColor);
-    pen.setWidth(2); // Устанавливаем ширину ��бводки
+    pen.setWidth(2); // Устанавливаем ширину бводки
 
     Rectangle *rect = new Rectangle(width, height, brush, pen); // Создаём прямоугольник с заданными параметрми
     scene->addItem(rect); // Добавляем прямоугольник на сцену

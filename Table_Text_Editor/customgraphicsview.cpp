@@ -1,4 +1,4 @@
-#include "CustomGraphicsView.h"
+#include "customgraphicsview.h"
 #include <QGraphicsScene>
 #include <QPen>
 #include <QGraphicsEllipseItem>

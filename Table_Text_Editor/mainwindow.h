@@ -44,6 +44,8 @@ private slots:
     void deleteRow();
     void deleteTable();
 
+    void on_tabWidget_tabBarClicked(int index);
+
 private:
     Ui::MainWindow *ui;
     bool documentSaved;

@@ -5,12 +5,17 @@
 #include <QGraphicsLineItem>
 #include <QMouseEvent>
 #include <QColor>
+#include <QMainWindow>
+#include <QGraphicsView>
+#include <QGraphicsScene>
+
+
 
 class CustomGraphicsView : public QGraphicsView {
     Q_OBJECT
 
 public:
-    explicit CustomGraphicsView(QGraphicsScene *scene, QWidget *parent = nullptr);
+     explicit CustomGraphicsView(QGraphicsScene *scene, QWidget *parent = nullptr);
     void setBrushSize(qreal size);
     void setBrushColor(const QColor &color);
     void setBrushStyle(Qt::BrushStyle style);
@@ -24,6 +29,8 @@ protected:
     void resizeEvent(QResizeEvent *event) override; // Override the resize event
 
 private:
+    QGraphicsView *view;
+    //QGraphicsScene *scene;
     bool isDrawing;   // Flag to indicate if drawing is in progress
     qreal brushSize;
     QColor brushColor;

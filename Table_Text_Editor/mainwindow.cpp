@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "graphics_editor.h"
 #include <QFileDialog>
 #include <QFile>
 #include <QTextStream>
@@ -388,3 +389,20 @@ void MainWindow::changeFont(const QFont &font)
 
 
 
+
+void MainWindow::on_tabWidget_tabBarClicked(int index)
+{
+    // Проверяем, нажата ли определенная вкладка, скажем, третья вкладка (индекс 2)
+      if (index == 2) {
+          // Создаем окно графического редактора
+          GraphicsEditorWindow *editorWindow = new GraphicsEditorWindow(this);
+
+          // Устанавливаем поведение удаления окна после закрытия
+          editorWindow->setAttribute(Qt::WA_DeleteOnClose);
+
+          // Показываем окно
+          editorWindow->show();
+      }
+
+
+}

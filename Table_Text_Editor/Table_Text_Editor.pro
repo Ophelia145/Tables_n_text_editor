@@ -31,7 +31,6 @@ SOURCES += \
         circle.cpp \
         complexobject.cpp \
         customgraphicsview.cpp \
-        file_funct.cpp \
         graphics_editor.cpp \
         khai.cpp \
         line.cpp \
@@ -40,6 +39,7 @@ SOURCES += \
         movabletextitem.cpp \
         rectangle.cpp \
         shape.cpp \
+        texteditwindow.cpp \
         triangle.cpp
 
 HEADERS += \
@@ -55,17 +55,20 @@ HEADERS += \
         movabletextitem.h \
         rectangle.h \
         shape.h \
+        texteditwindow.h \
         triangle.h
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+        text_edit.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-RESOURCES +=
+RESOURCES += \
+    ../src/res.qrc
 
 DISTFILES += \
     ../src/pencil.png
