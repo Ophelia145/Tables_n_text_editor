@@ -14,6 +14,14 @@
 #include <QSpinBox>
 #include<QInputDialog>
 
+
+
+
+
+
+
+
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -58,6 +66,29 @@ MainWindow::MainWindow(QWidget *parent) :
     documentSaved = true;
     //loadSettings();
     setupShortcuts();
+
+
+    GraphicsEditorWindow *editorWindow = new GraphicsEditorWindow(this);
+
+    // Создаем вкладки (если еще не созданы)
+    QTabWidget *tabWidget = new QTabWidget(this);
+    tabWidget->addTab(new QWidget(), "Tab 1");  // Первая вкладка
+    tabWidget->addTab(new QWidget(), "Tab 2");  // Вторая вкладка для редактора
+
+    // Подключаем сигнал изменения вкладки
+    connect(tabWidget, &QTabWidget::currentChanged, this, [this, editorWindow, tabWidget](int index) {
+        if (index == 1) {  // Вкладка tab2 имеет индекс 1
+            // Показываем редактор при переходе на tab2
+            editorWindow->show();
+        } else {
+            // Скрываем редактор, если пользователь на другой вкладке
+            editorWindow->hide();
+        }
+    });
+
+    // Добавляем табличный виджет в основной layout
+    setCentralWidget(tabWidget);
+
 }
 
 MainWindow::~MainWindow()

@@ -39,7 +39,6 @@ SOURCES += \
         movabletextitem.cpp \
         rectangle.cpp \
         shape.cpp \
-        texteditwindow.cpp \
         triangle.cpp
 
 HEADERS += \
@@ -55,12 +54,10 @@ HEADERS += \
         movabletextitem.h \
         rectangle.h \
         shape.h \
-        texteditwindow.h \
         triangle.h
 
 FORMS += \
-        mainwindow.ui \
-        text_edit.ui
+        mainwindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
